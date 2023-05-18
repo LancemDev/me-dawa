@@ -132,6 +132,16 @@ class database {
         }
     }
 
+    //Approve meds added to the database
+    function approveMeds($drugID){
+        //Prepare statement
+        $stmt = $conn->prepare("UPDATE drugs SET drugApproval = 1 WHERE drugID = :drugID");
+        $stmt->bindParam(':drugID', $drugID);
+
+        //Execute statement
+        $stmt->execute();
+    }
+
     //Giving a patient a prescription
     function givePrescription($patientID, $doctorID, $drugID, $prescriptionDescription){
         //Prepare statement
