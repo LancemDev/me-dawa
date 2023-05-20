@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
     <title>Sign Up</title>
 </head>
 <body>
     <!--Sign Up form for patients, doctors and supervisors having the firstName, lastName, password, emailaddress, residence, gender and a dropdown list having values patient, supervisor and doctor-->
     <div>
-        <form action="signup">
+        <form action="/config/signup.php" method = "POST">
             <label for="firstName"> First Name :</label>
             <input type="text" name="firstName" placeholder="First Name">
             <label for="lastName"> Last Name :</label>

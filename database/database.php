@@ -1,9 +1,10 @@
 <?php
 
 class database {
-    public $conn = null;
+    public $conn;
     public $host = "me-dawa-server.mysql.database.azure.com";
 
+    //Constructor
     public function __construct() {
         try {
             $this->conn = new PDO("mysql:host=$this->host;dbname=laravel", "iafgzihhqu@me-dawa-server", "mysql123lance");
