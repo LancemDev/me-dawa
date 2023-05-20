@@ -11,7 +11,7 @@
 
     <!--Login using username and password. Remember that the POST is being taken to a login.php-->
     <div>
-        <form action="/config/login.php" method="POST">
+        <form action="../config/signup.php" method="POST">
             <label for="username"> Username :</label>
             <input type="text" name="username" placeholder="Username">
             <label for="password"> Password :</label>
@@ -25,3 +25,4 @@
     </div>
 </body>
 </html>
+

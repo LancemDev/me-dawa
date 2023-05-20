@@ -1,25 +1,24 @@
 <?php
 
 class database {
-    public $conn;
-    public $host = "me-dawa-server.mysql.database.azure.com";
-
-    //Constructor
-    public function __construct() {
-        try {
-            $this->conn = new PDO("mysql:host=$this->host;dbname=laravel", "iafgzihhqu@me-dawa-server", "mysql123lance");
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connected successfully";
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
-    }
+    
+    $hostName="aws.connect.psdb.cloud";
+    $username="mdaz7j5wetlxigkp3m2p";
+    $this->password="pscale_pw_Yx80n7uN14OkbEhJM2DxCj5f7YJhN7GQ9sFGeksu6KN";
+    $this->databaseName="me-dawa";
+    // Add the ca certificate to the client credentials
+    $this->caCert = file_get_contents('cacert.pem');
+    // Make the connnection using PDO
+    $this->connection = new PDO("mysql:host=$this->hostName;dbname=$this->databaseName", $this->username, $this->password, array(
+        PDO::MYSQL_ATTR_SSL_CA => 'cacert.pem'
+    ));
+         
 
 
     //Signing up a new patient
     function patientSignup($patientFirstName, $patientSecondName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB){
         //Prepare statement
-        $stmt = $conn->prepare("INSERT INTO patients (patientFirstName, patientSecondName, patientEmail, patientPassword, patientPhoneNumber, patientAddress, patientGender, patientDOB) VALUES (:patientFirstName, :patientSecondName, :patientEmail, :patientPassword, :patientPhoneNumber, :patientAddress, :patientGender, :patientDOB)");
+        $stmt = $connection->prepare("INSERT INTO patients (patientFirstName, patientSecondName, patientEmail, patientPassword, patientPhoneNumber, patientAddress, patientGender, patientDOB) VALUES (:patientFirstName, :patientSecondName, :patientEmail, :patientPassword, :patientPhoneNumber, :patientAddress, :patientGender, :patientDOB)");
         $stmt->bindParam(':patientFirstName', $patientFirstName);
         $stmt->bindParam(':patientSecondName', $patientSecondName);
         $stmt->bindParam(':patientEmail', $patientEmail);
@@ -36,7 +35,7 @@ class database {
     //Signing up a new doctor
     function doctorSignup($doctorFirstName, $doctorSecondName, $doctorEmail, $doctorPassword, $doctorPhoneNumber, $doctorAddress, $doctorGender, $doctorDOB){
         //Prepare statement
-        $stmt = $conn->prepare("INSERT INTO doctors (doctorFirstName, doctorSecondName, doctorEmail, doctorPassword, doctorPhoneNumber, doctorAddress, doctorGender, doctorDOB) VALUES (:doctorFirstName, :doctorSecondName, :doctorEmail, :doctorPassword, :doctorPhoneNumber, :doctorAddress, :doctorGender, :doctorDOB)");
+        $stmt = $connection->prepare("INSERT INTO doctors (doctorFirstName, doctorSecondName, doctorEmail, doctorPassword, doctorPhoneNumber, doctorAddress, doctorGender, doctorDOB) VALUES (:doctorFirstName, :doctorSecondName, :doctorEmail, :doctorPassword, :doctorPhoneNumber, :doctorAddress, :doctorGender, :doctorDOB)");
         $stmt->bindParam(':doctorFirstName', $doctorFirstName);
         $stmt->bindParam(':doctorSecondName', $doctorSecondName);
         $stmt->bindParam(':doctorEmail', $doctorEmail);
@@ -53,7 +52,7 @@ class database {
     //Signing up a new pharmacy
     function pharmacySignup($pharmacyName, $pharmacyEmail, $pharmacyPassword, $pharmacyPhoneNumber, $pharmacyAddress){
         //Prepare statement
-        $stmt = $conn->prepare("INSERT INTO pharmacies (pharmacyName, pharmacyEmail, pharmacyPassword, pharmacyPhoneNumber, pharmacyAddress) VALUES (:pharmacyName, :pharmacyEmail, :pharmacyPassword, :pharmacyPhoneNumber, :pharmacyAddress)");
+        $stmt = $connection->prepare("INSERT INTO pharmacies (pharmacyName, pharmacyEmail, pharmacyPassword, pharmacyPhoneNumber, pharmacyAddress) VALUES (:pharmacyName, :pharmacyEmail, :pharmacyPassword, :pharmacyPhoneNumber, :pharmacyAddress)");
         $stmt->bindParam(':pharmacyName', $pharmacyName);
         $stmt->bindParam(':pharmacyEmail', $pharmacyEmail);
         $stmt->bindParam(':pharmacyPassword', $pharmacyPassword);
@@ -67,7 +66,7 @@ class database {
     //Signing up a new supervisor
     function supervisorSignup($supervisorFirstName, $supervisorSecondName, $supervisorEmail, $supervisorPassword, $supervisorPhoneNumber, $supervisorAddress, $supervisorGender, $supervisorDOB){
         //Prepare statement
-        $stmt = $conn->prepare("INSERT INTO supervisors (supervisorFirstName, supervisorSecondName, supervisorEmail, supervisorPassword, supervisorPhoneNumber, supervisorAddress, supervisorGender, supervisorDOB) VALUES (:supervisorFirstName, :supervisorSecondName, :supervisorEmail, :supervisorPassword, :supervisorPhoneNumber, :supervisorAddress, :supervisorGender, :supervisorDOB)");
+        $stmt = $connection->prepare("INSERT INTO supervisors (supervisorFirstName, supervisorSecondName, supervisorEmail, supervisorPassword, supervisorPhoneNumber, supervisorAddress, supervisorGender, supervisorDOB) VALUES (:supervisorFirstName, :supervisorSecondName, :supervisorEmail, :supervisorPassword, :supervisorPhoneNumber, :supervisorAddress, :supervisorGender, :supervisorDOB)");
         $stmt->bindParam(':supervisorFirstName', $supervisorFirstName);
         $stmt->bindParam(':supervisorSecondName', $supervisorSecondName);
         $stmt->bindParam(':supervisorEmail', $supervisorEmail);
@@ -84,7 +83,7 @@ class database {
     //Signing up a new Pharmaceutical company
     function companySignup($companyName, $companyEmail, $companyPassword, $companyPhoneNumber, $companyAddress){
         //Prepare statement
-        $stmt = $conn->prepare("INSERT INTO companies (companyName, companyEmail, companyPassword, companyPhoneNumber, companyAddress) VALUES (:companyName, :companyEmail, :companyPassword, :companyPhoneNumber, :companyAddress)");
+        $stmt = $connection->prepare("INSERT INTO companies (companyName, companyEmail, companyPassword, companyPhoneNumber, companyAddress) VALUES (:companyName, :companyEmail, :companyPassword, :companyPhoneNumber, :companyAddress)");
         $stmt->bindParam(':companyName', $companyName);
         $stmt->bindParam(':companyEmail', $companyEmail);
         $stmt->bindParam(':companyPassword', $companyPassword);
@@ -99,7 +98,7 @@ class database {
     //Adding meds to the database (Pharmaceuticals)
     function addMeds($drugName, $drugType, $drugPrice, $drugQuantity, $drugDescription){
         //Prepare statement
-        $stmt = $conn->prepare("INSERT INTO drugs (drugName, drugType, drugPrice, drugQuantity, drugDescription) VALUES (:drugName, :drugType, :drugPrice, :drugQuantity, :drugDescription)");
+        $stmt = $connection->prepare("INSERT INTO drugs (drugName, drugType, drugPrice, drugQuantity, drugDescription) VALUES (:drugName, :drugType, :drugPrice, :drugQuantity, :drugDescription)");
         $stmt->bindParam(':drugName', $drugName);
         $stmt->bindParam(':drugType', $drugType);
         $stmt->bindParam(':drugPrice', $drugPrice);
@@ -114,7 +113,7 @@ class database {
     //Should return true or false depending on whether the user exists or not
     function userExists($userName, $password, $table){
         //Prepare statement
-        $stmt = $conn->prepare("SELECT * FROM :table WHERE :tableEmail = :userName AND :tablePassword = :password");
+        $stmt = $connection->prepare("SELECT * FROM :table WHERE :tableEmail = :userName AND :tablePassword = :password");
         $stmt->bindParam(':table', $table);
         $stmt->bindParam(':userName', $userName);
         $stmt->bindParam(':password', $password);
@@ -136,7 +135,7 @@ class database {
     //Approve meds added to the database
     function approveMeds($drugID){
         //Prepare statement
-        $stmt = $conn->prepare("UPDATE drugs SET drugApproval = 1 WHERE drugID = :drugID");
+        $stmt = $connection->prepare("UPDATE drugs SET drugApproval = 1 WHERE drugID = :drugID");
         $stmt->bindParam(':drugID', $drugID);
 
         //Execute statement
@@ -146,7 +145,7 @@ class database {
     //Giving a patient a prescription
     function givePrescription($patientID, $doctorID, $drugID, $prescriptionDescription){
         //Prepare statement
-        $stmt = $conn->prepare("INSERT INTO prescriptions (patientID, doctorID, drugID, prescriptionDescription) VALUES (:patientID, :doctorID, :drugID, :prescriptionDescription)");
+        $stmt = $connection->prepare("INSERT INTO prescriptions (patientID, doctorID, drugID, prescriptionDescription) VALUES (:patientID, :doctorID, :drugID, :prescriptionDescription)");
         $stmt->bindParam(':patientID', $patientID);
         $stmt->bindParam(':doctorID', $doctorID);
         $stmt->bindParam(':drugID', $drugID);
@@ -159,7 +158,7 @@ class database {
     //Viewing history of prescriptions by patient
     function viewPrescriptionHistoryPatient($patientID){
         //Prepare statement
-        $stmt = $conn->prepare("SELECT * FROM prescriptions WHERE patientID = :patientID");
+        $stmt = $connection->prepare("SELECT * FROM prescriptions WHERE patientID = :patientID");
         $stmt->bindParam(':patientID', $patientID);
 
         //Execute statement
@@ -176,7 +175,7 @@ class database {
     //Viewing history of prescriptions by doctor
     function viewPrescriptionHistoryDoctor($doctorID){
         //Prepare statement
-        $stmt = $conn->prepare("SELECT * FROM prescriptions WHERE doctorID = :doctorID");
+        $stmt = $connection->prepare("SELECT * FROM prescriptions WHERE doctorID = :doctorID");
         $stmt->bindParam(':doctorID', $doctorID);
 
         //Execute statement
@@ -187,13 +186,5 @@ class database {
         $result = $stmt->fetchAll();
         return $result;
     }
-
-    //Viewing history of prescriptions by pharmacy
-    function viewPrescriptionHistoryPharmacy($pharmacyID){
-
-    }
-
-
-
 }
 ?>

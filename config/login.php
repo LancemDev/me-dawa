@@ -30,6 +30,9 @@ if(!empty($username) && !empty($password)){
             header('Location: ../view/supervisor.view.php');
         }
     }
+} else {
+    // If the username and password are empty, redirect to view/login.view.php
+    header('Location: ../view/login.view.php');
 }
 
 ?>

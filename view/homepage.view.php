@@ -5,8 +5,9 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="../Static/homepage.css">
 
-<link rel="stylesheet" href="/Static/homepage.css">
+<link rel="stylesheet" href="\Static\homepage.css">
 <title>Document</title>
 </head>
 
@@ -34,8 +35,8 @@
             </ul>
 
             </li>
-            <li><a href="">Login</a></li>
-            <li><a href="">Sign Up</a></li>
+            <li><a href="./login.view.php">Login</a></li>
+            <li><a href="./signup.view.php">Sign Up</a></li>
         </div>
       </ul>
     </nav>
@@ -61,7 +62,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <img src="/images/Temperature Measurement-cuate.png" alt="Photo 1" class="photo-left">
+        <img src="../images/Temperature Measurement-cuate.png" alt="Photo 1" class="photo-left">
         <div class="text-right">
             <div class="text-wrap">
             <h2>Text 1</h2>
@@ -72,16 +73,17 @@
     </div>
     <div class="row">
       <div class="col">
-        <img src="/images/Sent Message-cuate.png" alt="Photo 2" class="photo-right">
+        <img src="../images/Sent Message-cuate.png" alt="Photo 2" class="photo-right">
         <div class="text-left">
           <h2>Text 2</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit nunc et est sollicitudin, sed vestibulum sapien dapibus.</p>
         </div>
+      
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <img src="/images/Medicine-cuate.png" alt="Photo 3" class="photo-left">
+        <img src="../images/Medicine-cuate.png" alt="Photo 3" class="photo-left">
         <div class="text-right">
           <h2>Text 3</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit nunc et est sollicitudin, sed vestibulum sapien dapibus.</p>
