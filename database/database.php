@@ -14,7 +14,7 @@ class Database{
         $this->username = "mdaz7j5wetlxigkp3m2p";
         $this->password = "pscale_pw_Yx80n7uN14OkbEhJM2DxCj5f7YJhN7GQ9sFGeksu6KN";
         $this->databaseName = "me-dawa";
-        $this->caCert = file_get_contents('database\cacert.pem');
+        $this->caCert = file_get_contents('database\cacert.pema');
         try{
             // Make the connection using PDO
             $this->connection = new PDO("mysql:host=$this->hostName;dbname=$this->databaseName", $this->username, $this->password, array(
