@@ -14,7 +14,7 @@ class Database{
         $this->username = "mdaz7j5wetlxigkp3m2p";
         $this->password = "pscale_pw_Yx80n7uN14OkbEhJM2DxCj5f7YJhN7GQ9sFGeksu6KN";
         $this->databaseName = "me-dawa";
-        $this->caCert = file_get_contents('database\cacert.pema');
+        $this->caCert = file_get_contents('database\cacert.pem');
         try{
             // Make the connection using PDO
             $this->connection = new PDO("mysql:host=$this->hostName;dbname=$this->databaseName", $this->username, $this->password, array(
@@ -263,7 +263,6 @@ class Database{
             SET patientId = patientId + 1;
             SET NEW.patientId = CONCAT('P', LPAD(patientId, 3, '0'));
         END");
-        $stmt->execute();
     
         // Doing the same for doctors table
         $stmt = $this->connection->prepare("CREATE TRIGGER doctorIdGenerator BEFORE INSERT ON doctors FOR EACH ROW
@@ -295,7 +294,7 @@ class Database{
         END");
         $stmt->execute();
     
-        // Doing the same for drugs table
+        // Doing the same for drugs table but the id has already been created so we modify it
         $stmt = $this->connection->prepare("CREATE TRIGGER drugIdGenerator BEFORE INSERT ON drugs FOR EACH ROW
         BEGIN
             DECLARE drugId INT;
@@ -303,7 +302,6 @@ class Database{
             SET drugId = drugId + 1;
             SET NEW.drugId = CONCAT('DR', LPAD(drugId, 3, '0'));
         END");
-        $stmt->execute();
     
         // Doing the same for pharmacenuticalCompanies table
         $stmt = $this->connection->prepare("CREATE TRIGGER pharmacenuticalCompanyIdGenerator BEFORE INSERT ON pharmacenuticalCompanies FOR EACH ROW
