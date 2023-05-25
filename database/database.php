@@ -234,6 +234,9 @@ class Database{
 
 
 
+
+    
+
     //Viewing history of prescriptions by doctor
     function viewPrescriptionHistoryDoctor($doctorID){
         //Prepare statement
