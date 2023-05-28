@@ -1,4 +1,5 @@
 <?php
+/*
 $hostName = "aws.connect.psdb.cloud";
 $username = "mdaz7j5wetlxigkp3m2p";
 $password = "pscale_pw_Yx80n7uN14OkbEhJM2DxCj5f7YJhN7GQ9sFGeksu6KN";
@@ -85,4 +86,5 @@ function createTriggers(){
     END");
     $stmt->execute();
 }
+*/
 ?>
