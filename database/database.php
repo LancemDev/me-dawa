@@ -6,13 +6,13 @@ class Database{
     private $username;
     private $password;
     private $databaseName;
-    private $connection = null;
+    private $connection;
     private $caCert;
 
     public function __construct() {
         $this->hostName = "aws.connect.psdb.cloud";
-        $this->username = "fh41hstf9jvp4r8jl7se";
-        $this->password = "pscale_pw_i4Fbgqdo00b2ed1jSmPdCEJzlSiANTwrIeVAcqS9JCt";
+        $this->username = "dcewz1pnazm03farwdjb";
+        $this->password = "pscale_pw_9TbwKD0Mpcf3NHtx2IgKxRqKLBwt7nM4tc8QeOHCYLy";
         $this->databaseName = "me-dawa";
         $this->caCert = file_get_contents('../database/cacert.pem');
         try{
@@ -22,6 +22,25 @@ class Database{
             ));
         }catch(PDOException $e){
             echo "Connection failed: " . $e->getMessage();
+        }
+    }
+
+    // A function that returns true if the table patients exists
+    function patientsTableExists(){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SHOW TABLES LIKE 'patients'");
+
+        // Execute statement
+        $stmt->execute();
+
+        // Fetch the result
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Echo true if the table exists and false if it doesn't
+        if($result){
+            return true;
+        } else {
+            return false;
         }
     }
          
