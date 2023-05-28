@@ -14,6 +14,7 @@ try{
     echo "Connection failed: " . $e->getMessage();
 }
 
+
 function createTriggers(){
 
     // Creating triggers for patients table so that when a patient is added, a patientId is generated and when a patient is deleted, the patientId is deleted from the database. Also, the patientId generated should have the format "P001" and should be incremented by 1 for every new patient added.
