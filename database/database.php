@@ -6,15 +6,15 @@ class Database{
     private $username;
     private $password;
     private $databaseName;
-    private $connection;
+    private $connection = null;
     private $caCert;
 
     public function __construct() {
         $this->hostName = "aws.connect.psdb.cloud";
-        $this->username = "mdaz7j5wetlxigkp3m2p";
-        $this->password = "pscale_pw_Yx80n7uN14OkbEhJM2DxCj5f7YJhN7GQ9sFGeksu6KN";
+        $this->username = "fh41hstf9jvp4r8jl7se";
+        $this->password = "pscale_pw_i4Fbgqdo00b2ed1jSmPdCEJzlSiANTwrIeVAcqS9JCt";
         $this->databaseName = "me-dawa";
-        $this->caCert = file_get_contents('database\cacert.pem');
+        $this->caCert = file_get_contents('.../cacert.pem');
         try{
             // Make the connection using PDO
             $this->connection = new PDO("mysql:host=$this->hostName;dbname=$this->databaseName", $this->username, $this->password, array(

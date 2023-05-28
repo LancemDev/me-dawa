@@ -15,14 +15,17 @@
             <input type="text" name="firstName" placeholder="First Name">
             <label for="lastName"> Last Name :</label>
             <input type="text" name="lastName" placeholder="Last Name">
+            <label for="emailaddress"> Email Address :</label>
             <label for="password"> Password :</label>
             <input type="password" name="password" placeholder="Password">
-            <label for="emailaddress"> Email Address :</label>
-            <label for ="confirmPassword"> Confirm Password :</label>
-            <input type="password" name="confirmPassword" placeholder="Confirm Password">
-            <input type="email" name="emailaddress" placeholder="Email Address">
-            <label for="residence"> Residence :</label>
-            <input type="text" name="residence" placeholder="Residence">
+            <label for="phoneNumber"> Phone Number :</label>
+            <input type="number" name="phoneNumber" placeholder="Phone Number">
+            <label for="address"> Address :</label>
+            <input type="text" name="address" placeholder="Address">
+            <label for="gender"> Gender: </label>
+            <input type="text" name="gender" placeholder="Gender">
+            <label for="dob"> Date of Birth: </label>
+            <input type="date" name="dob" placeholder="Date of Birth">
             <div>
                 <label for="entity">Choose what type of user you are:</label>
                 <select name="entity" id="entity">

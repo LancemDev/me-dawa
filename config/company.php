@@ -5,5 +5,4 @@ require '../config/login.php';
 require '../config/signup.php';
 
 
-
 ?>

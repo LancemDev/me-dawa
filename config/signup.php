@@ -22,14 +22,15 @@ $database = new Database();
 $entity = $_POST['entity'];
 
 if($entity === "Patient"){
-    $patientFirstName = $_POST['patientFirstName'];
-    $patientSecondName = $_POST['patientSecondName'];
-    $patientEmail = $_POST['patientEmail'];
-    $patientPassword = $_POST['patientPassword'];
-    $patientPhoneNumber = $_POST['patientPhoneNumber'];
-    $patientAddress = $_POST['patientAddress'];
-    $patientGender = $_POST['patientGender'];
-    $patientDOB = $_POST['patientDOB'];
+    // Get the details from the form
+    $patientFirstName = $_POST['firstName'];
+    $patientSecondName = $_POST['lastName'];
+    $patientEmail = $_POST['emailaddress'];
+    $patientPassword = $_POST['password'];
+    $patientPhoneNumber = $_POST['phoneNumber'];
+    $patientAddress = $_POST['address'];
+    $patientGender = $_POST['gender'];
+    $patientDOB = $_POST['dob'];
 
     // Add these details to the database if all fields are entered
     if(!empty($patientFirstName) && !empty($patientSecondName) && !empty($patientEmail) && !empty($patientPassword) && !empty($patientPhoneNumber) && !empty($patientAddress) && !empty($patientGender) && !empty($patientDOB)){
@@ -87,7 +88,7 @@ if($entity === "Patient"){
 }
 
 // Redirect to view/login.view.php after 7 seconds
-header('Refresh: 7; URL=../view/login.view.php');
+//header('Refresh: 7; URL=../view/login.view.php');
 ?>
 </body>
 </html>

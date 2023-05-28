@@ -1,0 +1,12 @@
+/*Styling a form of the class container*/
+/*Make it look even better*/
+.container {
+  padding: 16px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  width: 50%;
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
