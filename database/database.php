@@ -14,7 +14,7 @@ class Database{
         $this->username = "fh41hstf9jvp4r8jl7se";
         $this->password = "pscale_pw_i4Fbgqdo00b2ed1jSmPdCEJzlSiANTwrIeVAcqS9JCt";
         $this->databaseName = "me-dawa";
-        $this->caCert = file_get_contents('.../cacert.pem');
+        $this->caCert = file_get_contents('../database/cacert.pem');
         try{
             // Make the connection using PDO
             $this->connection = new PDO("mysql:host=$this->hostName;dbname=$this->databaseName", $this->username, $this->password, array(
@@ -28,13 +28,13 @@ class Database{
 
 
     //Signing up a new patient
-    function patientSignup($patientFirstName, $patientSecondName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB){
+    function patientSignup($patientFirstName, $patientLastName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB){
         //Prepare statement
 
 
-        $stmt = $this->connection->prepare("INSERT INTO patients (patientFirstName, patientSecondName, patientEmail, patientPassword, patientPhoneNumber, patientAddress, patientGender, patientDOB) VALUES (:patientFirstName, :patientSecondName, :patientEmail, :patientPassword, :patientPhoneNumber, :patientAddress, :patientGender, :patientDOB)");
+        $stmt = $this->connection->prepare("INSERT INTO patients (patientFirstName, patientLastName, patientEmail, patientPassword, patientPhoneNumber, patientAddress, patientGender, patientDOB) VALUES (:patientFirstName, :patientSecondName, :patientEmail, :patientPassword, :patientPhoneNumber, :patientAddress, :patientGender, :patientDOB)");
         $stmt->bindParam(':patientFirstName', $patientFirstName);
-        $stmt->bindParam(':patientSecondName', $patientSecondName);
+        $stmt->bindParam(':patientLastName', $patientLastName);
         $stmt->bindParam(':patientEmail', $patientEmail);
         $stmt->bindParam(':patientPassword', $patientPassword);
         $stmt->bindParam(':patientPhoneNumber', $patientPhoneNumber);

@@ -1,3 +1,7 @@
+<?php
+include_once '../database/database.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +20,7 @@
             <label for="lastName"> Last Name :</label>
             <input type="text" name="lastName" placeholder="Last Name">
             <label for="emailaddress"> Email Address :</label>
+            <input type="email" name="emailaddress" placeholder="Email Address">
             <label for="password"> Password :</label>
             <input type="password" name="password" placeholder="Password">
             <label for="phoneNumber"> Phone Number :</label>

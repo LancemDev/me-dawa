@@ -24,7 +24,7 @@ $entity = $_POST['entity'];
 if($entity === "Patient"){
     // Get the details from the form
     $patientFirstName = $_POST['firstName'];
-    $patientSecondName = $_POST['lastName'];
+    $patientLastName = $_POST['lastName'];
     $patientEmail = $_POST['emailaddress'];
     $patientPassword = $_POST['password'];
     $patientPhoneNumber = $_POST['phoneNumber'];
@@ -33,9 +33,9 @@ if($entity === "Patient"){
     $patientDOB = $_POST['dob'];
 
     // Add these details to the database if all fields are entered
-    if(!empty($patientFirstName) && !empty($patientSecondName) && !empty($patientEmail) && !empty($patientPassword) && !empty($patientPhoneNumber) && !empty($patientAddress) && !empty($patientGender) && !empty($patientDOB)){
+    if(!empty($patientFirstName) && !empty($patientLastName) && !empty($patientEmail) && !empty($patientPassword) && !empty($patientPhoneNumber) && !empty($patientAddress) && !empty($patientGender) && !empty($patientDOB)){
         // Add the details to the database
-        $database->patientSignup($patientFirstName, $patientSecondName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB);
+        $database->patientSignup($patientFirstName, $patientLastName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB);
 
         // Get the generated patient id and echo it
         $patientId = $database->getPatientId($patientEmail);

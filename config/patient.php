@@ -1,6 +1,6 @@
 <?php
 
-require '../database/database.php';
+include_once '../config/Database.php';
 
 
 ?>
