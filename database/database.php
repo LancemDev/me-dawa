@@ -11,8 +11,8 @@ class Database{
 
     public function __construct() {
         $this->hostName = "aws.connect.psdb.cloud";
-        $this->username = "pc1xlpm417aip835wsmm";
-        $this->password = "pscale_pw_U6j70axGNH9fshPNMxBSHEU9RgTjw6rfu5hRK8v0D6g";
+        $this->username = "oz6stk29utvp7oletxo8";
+        $this->password = "pscale_pw_B1em2BKR5pThrpwmzfzfI7oWQU349F4K57gQDuEJSyO";
         $this->databaseName = "me-dawa";
         $this->caCert = file_get_contents('../database/cacert.pem');
         try{
