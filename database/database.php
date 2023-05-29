@@ -11,49 +11,30 @@ class Database{
 
     public function __construct() {
         $this->hostName = "aws.connect.psdb.cloud";
-        $this->username = "dcewz1pnazm03farwdjb";
-        $this->password = "pscale_pw_9TbwKD0Mpcf3NHtx2IgKxRqKLBwt7nM4tc8QeOHCYLy";
+        $this->username = "pc1xlpm417aip835wsmm";
+        $this->password = "pscale_pw_U6j70axGNH9fshPNMxBSHEU9RgTjw6rfu5hRK8v0D6g";
         $this->databaseName = "me-dawa";
         $this->caCert = file_get_contents('../database/cacert.pem');
         try{
             // Make the connection using PDO
             $this->connection = new PDO("mysql:host=$this->hostName;dbname=$this->databaseName", $this->username, $this->password, array(
-                PDO::MYSQL_ATTR_SSL_CA => 'cacert.pem'
+                PDO::MYSQL_ATTR_SSL_CA => '../database/cacert.pem'
             ));
         }catch(PDOException $e){
             echo "Connection failed: " . $e->getMessage();
-        }
-    }
-
-    // A function that returns true if the table patients exists
-    function patientsTableExists(){
-        // Prepare statement
-        $stmt = $this->connection->prepare("SHOW TABLES LIKE 'patients'");
-
-        // Execute statement
-        $stmt->execute();
-
-        // Fetch the result
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Echo true if the table exists and false if it doesn't
-        if($result){
-            return true;
-        } else {
-            return false;
         }
     }
          
 
 
     //Signing up a new patient
-    function patientSignup($patientFirstName, $patientLastName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB){
+    function patientSignup($patientFirstName, $patientSecondName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB){
         //Prepare statement
 
 
-        $stmt = $this->connection->prepare("INSERT INTO patients (patientFirstName, patientLastName, patientEmail, patientPassword, patientPhoneNumber, patientAddress, patientGender, patientDOB) VALUES (:patientFirstName, :patientSecondName, :patientEmail, :patientPassword, :patientPhoneNumber, :patientAddress, :patientGender, :patientDOB)");
+        $stmt = $this->connection->prepare("INSERT INTO patients (patientFirstName, patientSecondName, patientEmail, patientPassword, patientPhoneNumber, patientAddress, patientGender, patientDOB) VALUES (:patientFirstName, :patientSecondName, :patientEmail, :patientPassword, :patientPhoneNumber, :patientAddress, :patientGender, :patientDOB)");
         $stmt->bindParam(':patientFirstName', $patientFirstName);
-        $stmt->bindParam(':patientLastName', $patientLastName);
+        $stmt->bindParam(':patientSecondName', $patientSecondName);
         $stmt->bindParam(':patientEmail', $patientEmail);
         $stmt->bindParam(':patientPassword', $patientPassword);
         $stmt->bindParam(':patientPhoneNumber', $patientPhoneNumber);
@@ -84,7 +65,7 @@ class Database{
     //Signing up a new doctor
     function doctorSignup($doctorFirstName, $doctorSecondName, $doctorEmail, $doctorPassword, $doctorPhoneNumber, $doctorAddress, $doctorGender, $doctorDOB){
         //Prepare statement
-        $stmt = $this->connection->prepare("INSERT INTO doctors (doctorFirstName, doctorSecondName, doctorEmail, doctorPassword, doctorPhoneNumber, doctorAddress, doctorGender, doctorDOB) VALUES (:doctorFirstName, :doctorSecondName, :doctorEmail, :doctorPassword, :doctorPhoneNumber, :doctorAddress, :doctorGender, :doctorDOB)");
+        $stmt = $this->connection->prepare("INSERT INTO doctors (doctorFirstName, doctorLastName, doctorEmail, doctorPassword, doctorPhoneNumber, doctorAddress, doctorGender, doctorDOB) VALUES (:doctorFirstName, :doctorSecondName, :doctorEmail, :doctorPassword, :doctorPhoneNumber, :doctorAddress, :doctorGender, :doctorDOB)");
         $stmt->bindParam(':doctorFirstName', $doctorFirstName);
         $stmt->bindParam(':doctorSecondName', $doctorSecondName);
         $stmt->bindParam(':doctorEmail', $doctorEmail);
@@ -192,9 +173,9 @@ class Database{
 
     //Checking if a user exists. Either a patient, doctor, supervisor
     //Should return true or false depending on whether the user exists or not
-    function userExists($userName, $password, $table){
+    /*function userExists($userName, $password, $table){
         //Prepare statement
-        $stmt = $this->connection->prepare("SELECT * FROM :table WHERE :tableEmail = :userName AND :tablePassword = :password");
+        $stmt = $this->connection->prepare("SELECT * FROM $table WHERE :tableEmail = :userName AND :tablePassword = :password");
         $stmt->bindParam(':table', $table);
         $stmt->bindParam(':userName', $userName);
         $stmt->bindParam(':password', $password);
@@ -211,7 +192,7 @@ class Database{
         }else{
             return false;
         }
-    }
+    }*/
 
     //Approve meds added to the database
     function approveMeds($drugID){

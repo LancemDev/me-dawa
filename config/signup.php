@@ -35,7 +35,7 @@ if($entity === "Patient"){
     // Add these details to the database if all fields are entered
     if(!empty($patientFirstName) && !empty($patientLastName) && !empty($patientEmail) && !empty($patientPassword) && !empty($patientPhoneNumber) && !empty($patientAddress) && !empty($patientGender) && !empty($patientDOB)){
         // Add the details to the database
-        $database->patientSignup($patientFirstName, $patientLastName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB);
+        $database->doctorSignup($patientFirstName, $patientLastName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB);
 
         // Get the generated patient id and echo it
         $patientId = $database->getPatientId($patientEmail);
@@ -44,14 +44,14 @@ if($entity === "Patient"){
         echo "Please fill in all the fields";
     }
 } else if($entity === "Doctor"){
-    $doctorFirstName = $_POST['doctorFirstName'];
-    $doctorSecondName = $_POST['doctorSecondName'];
-    $doctorEmail = $_POST['doctorEmail'];
-    $doctorPassword = $_POST['doctorPassword'];
-    $doctorPhoneNumber = $_POST['doctorPhoneNumber'];
-    $doctorAddress = $_POST['doctorAddress'];
-    $doctorGender = $_POST['doctorGender'];
-    $doctorDOB = $_POST['doctorDOB'];
+    $doctorFirstName = $_POST['firstName'];
+    $doctorSecondName = $_POST['lastName'];
+    $doctorEmail = $_POST['emailaddress'];
+    $doctorPassword = $_POST['password'];
+    $doctorPhoneNumber = $_POST['phoneNumber'];
+    $doctorAddress = $_POST['address'];
+    $doctorGender = $_POST['gender'];
+    $doctorDOB = $_POST['dob'];
     // Add these details to the database if all fields are entered
     if(!empty($doctorFirstName) && !empty($doctorSecondName) && !empty($doctorEmail) && !empty($doctorPassword) && !empty($doctorPhoneNumber) && !empty($doctorAddress) && !empty($doctorGender) && !empty($doctorDOB)){
         // Add the details to the database
