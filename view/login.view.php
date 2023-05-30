@@ -4,24 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Static/homepage.css">
-    <title>Log In</title>
+    <link rel="stylesheet" href="../Static/login.css">
+    <link rel="stylesheet" href="../Static/form.scss">
+    <title>Login</title>
 </head>
 <body>
 
     <!--Login using username and password. Remember that the POST is being taken to a login.php-->
-    <div>
-        <form action="../config/signup.php" method="POST">
-            <label for="username"> Username :</label>
-            <input type="text" name="username" placeholder="Username">
-            <label for="password"> Password :</label>
-            <input type="password" name="password" placeholder="Password">
-            <label for="entity">Choose what type of user you are:</label>
-            <select name="entity" id="entity">
-                <option value="Doctor">Doctor</option>
-                <option value="Patient">Patient</option>
-                <option value="Supervisor">Supervisor</option>
+<div class="container">
+	<!-- code here -->
+	<div class="card">
+		<div class="card-image">	
+			<h2 class="card-heading">
+				Get right back in<br>
+				<small>Login</small>
+			</h2>
+		</div>
+		<form class="card-form" method="post" action="../config/login.php">
+			<div class="input">
+				<input type="text" class="input-field" name="username"  required/>
+				<label class="input-label">Username</label>
+			</div>
+            <div class="input">
+                <input type="password" class="input-field" name="password" required/>
+                <label class="input-label">Password</label>
+            </div>
+            <div class="action">
+                <input type="submit" class="action-button" value="Login" />
+            </div>
         </form>
+        <div class="card-info">
+            <p>By signing up you are agreeing to our <a href="#">Terms and Conditions</a></p>
+        </div>
+	</div>
+</div>
+
     </div>
 </body>
 </html>

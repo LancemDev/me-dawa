@@ -35,7 +35,7 @@ if($entity === "Patient"){
     // Add these details to the database if all fields are entered
     if(!empty($patientFirstName) && !empty($patientLastName) && !empty($patientEmail) && !empty($patientPassword) && !empty($patientPhoneNumber) && !empty($patientAddress) && !empty($patientGender) && !empty($patientDOB)){
         // Add the details to the database
-        $database->doctorSignup($patientFirstName, $patientLastName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB);
+        $database->patientSignup($patientFirstName, $patientLastName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB);
 
         // Get the generated patient id and echo it
         $patientId = $database->getPatientId($patientEmail);

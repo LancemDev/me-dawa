@@ -23,18 +23,6 @@
 
         <!-- NAVIGATION MENUS -->
         <div class="menu">
-            <li><a href="">Home</a></li>
-            <li class="services">
-            <a href="/">Services</a>
-
-            <!-- DROPDOWN MENU -->
-            <ul class="dropdown">
-              <li><a href="/">Our Products</a></li>
-              <li><a href="/">Our Objectives</a></li>
-              <li><a href="/">Our Meetings</a></li>
-            </ul>
-
-            </li>
             <li><a href="./login.view.php">Login</a></li>
             <li><a href="./signup.view.php">Sign Up</a></li>
         </div>
@@ -45,15 +33,15 @@
   <!-- The carousel -->
   <div class="carousel-container">
     <div class="carousel">
-      <div class="carousel__face"><span>This is something</span></div>
-      <div class="carousel__face"><span>Very special</span></div>
-      <div class="carousel__face"><span>Special is the key</span></div>
+      <div class="carousel__face"><span>Wonderful Service</span></div>
+      <div class="carousel__face"><span>Trusted by Doctors</span></div>
+      <div class="carousel__face"><span>Secure</span></div>
       <div class="carousel__face"><span>For you</span></div>
       <div class="carousel__face"><span>Just give it</span></div>
       <div class="carousel__face"><span>A try</span></div>
       <div class="carousel__face"><span>And see</span></div>
       <div class="carousel__face"><span>How IT Works</span></div>
-      <div class="carousel__face"><span>Woow</span></div>
+      <div class="carousel__face"><span>Welcome</span></div>
     </div>
   </div>
 
@@ -65,8 +53,8 @@
         <img src="../images/Temperature Measurement-cuate.png" alt="Photo 1" class="photo-left">
         <div class="text-right">
             <div class="text-wrap">
-            <h2>Text 1</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit nunc et est sollicitudin, sed vestibulum sapien dapibus.</p>
+            <h2>Haven for doctors</h2>
+            <p>Bringing a whole new view to drug dispensation.</p>
           </div>
         </div>
       </div>
@@ -75,8 +63,8 @@
       <div class="col">
         <img src="../images/Sent Message-cuate.png" alt="Photo 2" class="photo-right">
         <div class="text-left">
-          <h2>Text 2</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit nunc et est sollicitudin, sed vestibulum sapien dapibus.</p>
+          <h2>Trusted by Patients worldwide</h2>
+          <p>Get a secure platform to view your prescriptions</p>
         </div>
       
       </div>
@@ -85,8 +73,8 @@
       <div class="col">
         <img src="../images/Medicine-cuate.png" alt="Photo 3" class="photo-left">
         <div class="text-right">
-          <h2>Text 3</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit nunc et est sollicitudin, sed vestibulum sapien dapibus.</p>
+          <h2>Security</h2>
+          <p>Doctors also get a platform to track their patients prescriptions</p>
         </div>
       </div>
     </div>
@@ -98,12 +86,12 @@
       <div class="row">
         <div class="footer-col">
           <h3>About Us</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit nunc et est sollicitudin, sed vestibulum sapien dapibus.</p>
+          <p>Excellence</p>
         </div>
         <div class="footer-col">
           <h3>Contact Us</h3>
           <ul>
-            <li>Address: 123 Main St, Anytown USA</li>
+            <li>Address: 123 Main St, Anytown </li>
             <li>Phone: 555-123-4567</li>
             <li>Email: info@example.com</li>
           </ul>
@@ -119,7 +107,7 @@
       </div>
       <div class="row">
         <div class="footer-col">
-          <p>&copy; 2023 Example Company. All rights reserved.</p>
+          <p>&copy; 2023 Me-Dawa. All rights reserved.</p>
         </div>
       </div>
     </div>

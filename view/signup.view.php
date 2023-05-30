@@ -8,39 +8,70 @@ include_once '../database/database.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Static/signup.css">
+    <link rel="stylesheet" href="../Static/form.scss">
     <title>Sign Up</title>
 </head>
 <body>
     <!--Sign Up form for patients, doctors and supervisors having the firstName, lastName, password, emailaddress, residence, gender and a dropdown list having values patient, supervisor and doctor-->
+
     <div class="container">
-        <form action="../config/signup.php" method = "POST">
-            <label for="firstName"> First Name :</label>
-            <input type="text" name="firstName" placeholder="First Name">
-            <label for="lastName"> Last Name :</label>
-            <input type="text" name="lastName" placeholder="Last Name">
-            <label for="emailaddress"> Email Address :</label>
-            <input type="email" name="emailaddress" placeholder="Email Address">
-            <label for="password"> Password :</label>
-            <input type="password" name="password" placeholder="Password">
-            <label for="phoneNumber"> Phone Number :</label>
-            <input type="number" name="phoneNumber" placeholder="Phone Number">
-            <label for="address"> Address :</label>
-            <input type="text" name="address" placeholder="Address">
-            <label for="gender"> Gender: </label>
-            <input type="text" name="gender" placeholder="Gender">
-            <label for="dob"> Date of Birth: </label>
-            <input type="date" name="dob" placeholder="Date of Birth">
-            <div>
-                <label for="entity">Choose what type of user you are:</label>
-                <select name="entity" id="entity">
+	<!-- code here -->
+	<div class="card">
+		<div class="card-image">	
+			<h2 class="card-heading">
+				Get started<br>
+				<small>Sign Up</small>
+			</h2>
+		</div>
+		<form class="card-form" method="post" action="../config/login.php">
+			<div class="input">
+				<input type="text" class="input-field" name="firstName"  required/>
+				<label class="input-label">First Name</label>
+			</div>
+            <div class="input">
+				<input type="text" class="input-field" name="lastName"  required/>
+				<label class="input-label">Last Name</label>
+			</div>
+            <div class="input">
+				<input type="email" class="input-field" name="emailaddress"  required/>
+				<label class="input-label">Email Address</label>
+			</div>
+            <div class="input">
+				<input type="password" class="input-field" name="password"  required/>
+				<label class="input-label">Password</label>
+			</div>
+            <div class="input">
+				<input type="text" class="input-field" name="phoneNumber"  required/>
+				<label class="input-label">Phine Number</label>
+			</div>
+            <div class="input">
+				<input type="text" class="input-field" name="address"  required/>
+				<label class="input-label">Address</label>
+			</div>
+            <div class="input">
+				<input type="text" class="input-field" name="gender"  required/>
+				<label class="input-label">Gender</label>
+			</div>
+            <div class="input">
+				<input type="date" class="input-field" name="dob"  required/>
+				<label class="input-label">Date of Birth</label>
+			</div>
+            <div class="input">
+                <select name="entity" id="entity" class="input-field" value="">
                     <option value="Doctor">Doctor</option>
                     <option value="Patient">Patient</option>
                     <option value="Supervisor">Supervisor</option>
                 </select>
+				<label class="input-label">Entity</label>
+			</div>
+            <div class="action">
+                <input type="submit" class="action-button" value="Login" />
             </div>
-            <input type="submit" value="Sign Up">
         </form>
-    </div>
+        <div class="card-info">
+            <p>By signing up you are agreeing to our <a href="#">Terms and Conditions</a></p>
+        </div>
+	</div>
+</div>
 </body>
 </html>
