@@ -23,7 +23,7 @@ include_once '../database/database.php';
 				<small>Sign Up</small>
 			</h2>
 		</div>
-		<form class="card-form" method="post" action="../config/login.php">
+		<form class="card-form" method="POST" action="../config/signup.php">
 			<div class="input">
 				<input type="text" class="input-field" name="firstName"  required/>
 				<label class="input-label">First Name</label>
@@ -42,7 +42,7 @@ include_once '../database/database.php';
 			</div>
             <div class="input">
 				<input type="text" class="input-field" name="phoneNumber"  required/>
-				<label class="input-label">Phine Number</label>
+				<label class="input-label">Phone Number</label>
 			</div>
             <div class="input">
 				<input type="text" class="input-field" name="address"  required/>
@@ -58,9 +58,9 @@ include_once '../database/database.php';
 			</div>
             <div class="input">
                 <select name="entity" id="entity" class="input-field" value="">
-                    <option value="Doctor">Doctor</option>
-                    <option value="Patient">Patient</option>
-                    <option value="Supervisor">Supervisor</option>
+                    <option value="Doctor" class="input">Doctor</option>
+                    <option value="Patient" class="input">Patient</option>
+                    <option value="Supervisor" class="input">Supervisor</option>
                 </select>
 				<label class="input-label">Entity</label>
 			</div>

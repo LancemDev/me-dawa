@@ -6,37 +6,69 @@
 </head>
 <body>
 <?php
-// Get username and password details from the form in view/login.php
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+include '../database/database.php';
+
+// Create an instance of the database class
+$database = new Database();
+
+// Get entity from the form
+$entity = $_POST['entity'];
+
+// Depending on the entity, get the details from the form
+if ($entity === "patient"){
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $entity = $_POST['entity'];
+    $entity = "patients";
+
+    // Check if the fields are empty
+    if(!empty($username) && !empty($password) && !empty($entity)){
+        // Check if the user exists and if they do, redirect them to views/patient.view.php
+        if($database->userExists($username, $password, $entity)){
+            header("Location: ../views/patient.view.php");
+        } else {
+            echo "User does not exist";
+        }
+    } else {
+        echo "Please fill in all the fields";
+    }
 }
 
-// Check if the username and password are not empty
-if(!empty($username) && !empty($password)){
-    // Call the login function from database/database.php
-    require '../database/database.php';
-    // Create an instance of the database class
-    $db = new Database();
-    $login = $db->userExists($username, $password, $entity);
-    if($login){
-        // If the login is successful, redirect to the page of that specific entity
-        if($entity == 'Doctor'){
-            header('Location: ../view/doctor.view.php');
-        } else if($entity == 'Patient'){
-            header('Location: ../view/patient.view.php');
-        } else if($entity == 'Supervisor'){
-            header('Location: ../view/supervisor.view.php');
+if ($entity === "doctor"){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $entity = "doctors";
+
+    // Check if the fields are empty
+    if(!empty($username) && !empty($password) && !empty($entity)){
+        echo "Check one";
+        // Check if the user exists and if they do, redirect them to views/doctor.view.php
+        if($database->userExists($username, $password, $entity)){
+            header("Location: ../views/doctor.view.php");
+        } else {
+            echo "User does not exist";
         }
+    } else {
+        echo "Please fill in all the fields";
     }
-    else{
-        // If the login is unsuccessful, redirect to view/login.view.php and display an error message
-        header('Location: ../view/login.view.php?error=1');
+}
+
+if ($entity === "supervisor"){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $entity = "supervisors";
+
+    // Check if the fields are empty
+    if(!empty($username) && !empty($password) && !empty($entity)){
+        // Check if the user exists and if they do, redirect them to views/admin.view.php
+        if($database->userExists($username, $password, $entity)){
+            header("Location: ../views/supervisor.view.php");
+        } else {
+            echo "User does not exist";
+        }
+    } else {
+        echo "Please fill in all the fields";
     }
-} else {
-    // If the username and password are empty, redirect to view/login.view.php
-    header('Location: ../view/login.view.php');
 }
 
 ?>

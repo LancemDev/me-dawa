@@ -14,8 +14,8 @@ class Database{
 
         // Note that if you are viewing this code from the github repository, you will not be able to access the database
         // This is because the database credentials will be revoked by the cloud provider for security reasons
-        $this->username = "ojuqq9ujqm68xhwwzkww";
-        $this->password = "pscale_pw_xqJuARCbjKp0ZahYqoZhreuEg9iRxwGytNDeJmdwyzV";
+        $this->username = "";
+        $this->password = "";
         $this->databaseName = "me-dawa";
         $this->caCert = file_get_contents('../database/cacert.pem');
         try{
@@ -135,7 +135,7 @@ class Database{
     //Signing up a new supervisor
     function supervisorSignup($supervisorFirstName, $supervisorSecondName, $supervisorEmail, $supervisorPassword, $supervisorPhoneNumber, $supervisorAddress, $supervisorGender, $supervisorDOB){
         //Prepare statement
-        $stmt = $this->connection->prepare("INSERT INTO supervisors (supervisorFirstName, supervisorSecondName, supervisorEmail, supervisorPassword, supervisorPhoneNumber, supervisorAddress, supervisorGender, supervisorDOB) VALUES (:supervisorFirstName, :supervisorSecondName, :supervisorEmail, :supervisorPassword, :supervisorPhoneNumber, :supervisorAddress, :supervisorGender, :supervisorDOB)");
+        $stmt = $this->connection->prepare("INSERT INTO supervisors (supervisorFirstName, supervisorLastName, supervisorEmail, supervisorPassword, supervisorPhoneNumber, supervisorAddress, supervisorGender, supervisorDOB) VALUES (:supervisorFirstName, :supervisorSecondName, :supervisorEmail, :supervisorPassword, :supervisorPhoneNumber, :supervisorAddress, :supervisorGender, :supervisorDOB)");
         $stmt->bindParam(':supervisorFirstName', $supervisorFirstName);
         $stmt->bindParam(':supervisorSecondName', $supervisorSecondName);
         $stmt->bindParam(':supervisorEmail', $supervisorEmail);
@@ -181,14 +181,16 @@ class Database{
 
 
     //Adding meds to the database (Pharmaceuticals)
-    function addMeds($drugName, $drugType, $drugPrice, $drugQuantity, $drugDescription){
+    function addMeds($drugName, $drugDescription, $drugPrice, $drugQuantity, $drugExpirationDate, $drugManufacturingDate, $drugCompany){
         //Prepare statement
-        $stmt = $this->connection->prepare("INSERT INTO drugs (drugName, drugType, drugPrice, drugQuantity, drugDescription) VALUES (:drugName, :drugType, :drugPrice, :drugQuantity, :drugDescription)");
+        $stmt = $this->connection->prepare("INSERT INTO drugs (drugName, drugDescription, drugPrice, drugQuantity, drugExpirationDate, drugManufacturingDate, drugCompany) VALUES (:drugName, :drugDescription, :drugPrice, :drugQuantity, :drugExpirationDate, :drugManufacturingDate, :drugCompany)");
         $stmt->bindParam(':drugName', $drugName);
-        $stmt->bindParam(':drugType', $drugType);
+        $stmt->bindParam(':drugDescription', $drugDescription);
         $stmt->bindParam(':drugPrice', $drugPrice);
         $stmt->bindParam(':drugQuantity', $drugQuantity);
-        $stmt->bindParam(':drugDescription', $drugDescription);
+        $stmt->bindParam(':drugExpirationDate', $drugExpirationDate);
+        $stmt->bindParam(':drugManufacturingDate', $drugManufacturingDate);
+        $stmt->bindParam(':drugCompany', $drugCompany);
 
         //Execute statement
         $stmt->execute();
@@ -220,7 +222,7 @@ class Database{
     //Approve meds added to the database
     function approveMeds($drugID){
         //Prepare statement
-        $stmt = $this->connection->prepare("UPDATE drugs SET drugApproval = 1 WHERE drugID = :drugID");
+        $stmt = $this->connection->prepare("UPDATE drugs SET approved = 1 WHERE drugID = :drugID");
         $stmt->bindParam(':drugID', $drugID);
 
         //Execute statement

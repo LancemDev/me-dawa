@@ -38,8 +38,8 @@ if($entity === "Patient"){
         $database->patientSignup($patientFirstName, $patientLastName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB);
 
         // Get the generated patient id and echo it
-        $patientId = $database->getPatientId($patientEmail);
-        echo "Your patient id is: " . $patientId." Please use it to login.";
+        //$patientId = $database->getPatientId($patientEmail);
+        //echo "Your patient id is: " . $patientId." Please use it to login.";
     } else {
         echo "Please fill in all the fields";
     }
@@ -58,21 +58,21 @@ if($entity === "Patient"){
         $database->doctorSignup($doctorFirstName, $doctorSecondName, $doctorEmail, $doctorPassword, $doctorPhoneNumber, $doctorAddress, $doctorGender, $doctorDOB);
 
         // Get the generated doctor id and echo it
-        $doctorId = $database->getDoctorId($doctorEmail);
-        echo "Your doctor id is: " . $doctorId." Please use it to login.";
+        //$doctorId = $database->getDoctorId($doctorEmail);
+        //echo "Your doctor id is: " . $doctorId." Please use it to login.";
     } else {
         echo "Please fill in all the fields";
     }
 
 } else if($entity === "Supervisor"){
-    $supervisorFirstName = $_POST['supervisorFirstName'];
-    $supervisorSecondName = $_POST['supervisorSecondName'];
-    $supervisorEmail = $_POST['supervisorEmail'];
-    $supervisorPassword = $_POST['supervisorPassword'];
-    $supervisorPhoneNumber = $_POST['supervisorPhoneNumber'];
-    $supervisorAddress = $_POST['supervisorAddress'];
-    $supervisorGender = $_POST['supervisorGender'];
-    $supervisorDOB = $_POST['supervisorDOB'];
+    $supervisorFirstName = $_POST['firstName'];
+    $supervisorSecondName = $_POST['lastName'];
+    $supervisorEmail = $_POST['emailaddress'];
+    $supervisorPassword = $_POST['password'];
+    $supervisorPhoneNumber = $_POST['phoneNumber'];
+    $supervisorAddress = $_POST['address'];
+    $supervisorGender = $_POST['gender'];
+    $supervisorDOB = $_POST['dob'];
 
     // Add these details to the database if all fields are entered
     if(!empty($supervisorFirstName) && !empty($supervisorSecondName) && !empty($supervisorEmail) && !empty($supervisorPassword) && !empty($supervisorPhoneNumber) && !empty($supervisorAddress) && !empty($supervisorGender) && !empty($supervisorDOB)){
@@ -80,8 +80,8 @@ if($entity === "Patient"){
         $database->supervisorSignup($supervisorFirstName, $supervisorSecondName, $supervisorEmail, $supervisorPassword, $supervisorPhoneNumber, $supervisorAddress, $supervisorGender, $supervisorDOB);
 
         // Get the generated supervisor id and echo it
-        $supervisorId = $database->getSupervisorId($supervisorEmail);
-        echo "Your supervisor id is: " . $supervisorId." Please use it to login.";
+        //$supervisorId = $database->getSupervisorId($supervisorEmail);
+        //echo "Your supervisor id is: " . $supervisorId." Please use it to login.";
     } else {
         echo "Please fill in all the fields";
     }

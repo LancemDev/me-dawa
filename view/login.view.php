@@ -29,6 +29,14 @@
                 <input type="password" class="input-field" name="password" required/>
                 <label class="input-label">Password</label>
             </div>
+            <div class="input">
+                <select name="entity" id="entity" class="input-field" value="">
+                    <option value="Doctor" class="input">Doctor</option>
+                    <option value="Patient" class="input">Patient</option>
+                    <option value="Supervisor" class="input">Supervisor</option>
+                </select>
+				<label class="input-label">Entity</label>
+			</div>
             <div class="action">
                 <input type="submit" class="action-button" value="Login" />
             </div>
