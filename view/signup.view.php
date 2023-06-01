@@ -65,7 +65,7 @@ include_once '../database/database.php';
 				<label class="input-label">Entity</label>
 			</div>
             <div class="action">
-                <input type="submit" class="action-button" value="Login" />
+                <input type="submit" class="action-button" value="Sign Up" />
             </div>
         </form>
         <div class="card-info">

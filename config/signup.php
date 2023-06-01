@@ -4,11 +4,6 @@
     <title>Processing login details</title>
 </head>
 <body>
-    <div>
-        <h1>
-            Use the details to login now.
-        </h1>
-    </div>
 <?php
 
 // Include the database connection file
@@ -38,10 +33,13 @@ if($entity === "Patient"){
         $database->patientSignup($patientFirstName, $patientLastName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB);
 
         // Get the generated patient id and echo it
-        //$patientId = $database->getPatientId($patientEmail);
-        //echo "Your patient id is: " . $patientId." Please use it to login.";
+        $patientId = $database->getPatientId($patientEmail);
+        echo "<script>alert('Your patient id is: " . $patientId." Please use it to login.')</script>";
+
+        // Then redirect to the login page
+        header("Location: ../view/login.view.php");
     } else {
-        echo "Please fill in all the fields";
+        echo "<script>alert('Please fill in all the fields')</script>";
     }
 } else if($entity === "Doctor"){
     $doctorFirstName = $_POST['firstName'];
@@ -58,10 +56,13 @@ if($entity === "Patient"){
         $database->doctorSignup($doctorFirstName, $doctorSecondName, $doctorEmail, $doctorPassword, $doctorPhoneNumber, $doctorAddress, $doctorGender, $doctorDOB);
 
         // Get the generated doctor id and echo it
-        //$doctorId = $database->getDoctorId($doctorEmail);
-        //echo "Your doctor id is: " . $doctorId." Please use it to login.";
+        $doctorId = $database->getDoctorId($doctorEmail);
+        echo "<script>alert('Your doctor id is: " . $doctorId." Please use it to login.')</script>";
+
+        // Then redirect to the login page
+        header("Location: ../view/login.view.php");
     } else {
-        echo "Please fill in all the fields";
+        echo "<script>alert('Please fill in all the fields')</script>";
     }
 
 } else if($entity === "Supervisor"){
@@ -80,10 +81,13 @@ if($entity === "Patient"){
         $database->supervisorSignup($supervisorFirstName, $supervisorSecondName, $supervisorEmail, $supervisorPassword, $supervisorPhoneNumber, $supervisorAddress, $supervisorGender, $supervisorDOB);
 
         // Get the generated supervisor id and echo it
-        //$supervisorId = $database->getSupervisorId($supervisorEmail);
-        //echo "Your supervisor id is: " . $supervisorId." Please use it to login.";
+        $supervisorId = $database->getSupervisorId($supervisorEmail);
+        echo "<script>alert('Your supervisor id is: " . $supervisorId." Please use it to login.')</script>";
+
+        // Then redirect to the login page
+        header("Location: ../view/login.view.php");
     } else {
-        echo "Please fill in all the fields";
+        echo "<script>alert('Please fill in all the fields')</script>";
     }
 }
 

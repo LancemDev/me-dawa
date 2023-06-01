@@ -18,14 +18,14 @@
     <!-- NAVIGATION MENU -->
     <ul class="nav-links">
         <div class="menu">
-            <li><a href="">Home</a></li>
-            <li><a href="">Sign Out</a></li>
+            <li><a href="../view/homepage.view.php">Home</a></li>
+            <li><a href="../config/signout.php">Sign Out</a></li>
         </div>
     </ul>
 </nav>
 </div>
 
-<div class="container">
+<div class="">
 	<!-- code here -->
 	<div class="card">
 		<div class="card-image">	
@@ -111,3 +111,5 @@
       </div>
     </div>
   </footer>
+</body>
+</html>

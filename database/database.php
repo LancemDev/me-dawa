@@ -1,5 +1,7 @@
 <?php
 
+include '../config/login.php';
+
 class Database{
 
     private $hostName;
@@ -28,20 +30,60 @@ class Database{
         }
     }
     
-    // Checking whether a user exists and whether the password is correct
-    function userExists($username, $password, $entity){
-        // Prepare statement
-        $stmt = $this->connection->prepare("SELECT * FROM $entity WHERE $entity"."ID = :username");
-        $stmt->bindParam(':username', $username);
+    // Checking whether a patient exists and confirming their password
+    function patientExists($patientID, $patientPassword){
+        //Prepare statement
+        $stmt = $this->connection->prepare("SELECT patientPassword FROM patients WHERE patientID = :patientID");
+        $stmt->bindParam(':patientID', $patientID);
 
-        // Execute statement
+        //Execute statement
         $stmt->execute();
 
-        // Fetch the result
+        //Fetch the result
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Check if the password is correct
-        if(password_verify($password, $result[$entity.'Password'])){
+        //Check if the password matches
+        if($result['patientPassword'] === $patientPassword){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Checking whether a doctor exists and confirming their password
+    function doctorExists($doctorID, $doctorPassword){
+        //Prepare statement
+        $stmt = $this->connection->prepare("SELECT doctorPassword FROM doctors WHERE doctorID = :doctorID");
+        $stmt->bindParam(':doctorID', $doctorID);
+
+        //Execute statement
+        $stmt->execute();
+
+        //Fetch the result
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //Check if the password matches
+        if($result['doctorPassword'] === $doctorPassword){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Checking whether a supervisor exists and confirming their password
+    function supervisorExists($supervisorID, $supervisorPassword){
+        //Prepare statement
+        $stmt = $this->connection->prepare("SELECT supervisorPassword FROM supervisors WHERE supervisorID = :supervisorID");
+        $stmt->bindParam(':supervisorID', $supervisorID);
+
+        //Execute statement
+        $stmt->execute();
+
+        //Fetch the result
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //Check if the password matches
+        if($result['supervisorPassword'] === $supervisorPassword){
             return true;
         } else {
             return false;
@@ -54,9 +96,9 @@ class Database{
         //Prepare statement
 
 
-        $stmt = $this->connection->prepare("INSERT INTO patients (patientFirstName, patientSecondName, patientEmail, patientPassword, patientPhoneNumber, patientAddress, patientGender, patientDOB) VALUES (:patientFirstName, :patientSecondName, :patientEmail, :patientPassword, :patientPhoneNumber, :patientAddress, :patientGender, :patientDOB)");
+        $stmt = $this->connection->prepare("INSERT INTO patients (patientFirstName, patientLastName, patientEmail, patientPassword, patientPhoneNumber, patientAddress, patientGender, patientDOB) VALUES (:patientFirstName, :patientLastName, :patientEmail, :patientPassword, :patientPhoneNumber, :patientAddress, :patientGender, :patientDOB)");
         $stmt->bindParam(':patientFirstName', $patientFirstName);
-        $stmt->bindParam(':patientSecondName', $patientSecondName);
+        $stmt->bindParam(':patientLastName', $patientSecondName);
         $stmt->bindParam(':patientEmail', $patientEmail);
         $stmt->bindParam(':patientPassword', $patientPassword);
         $stmt->bindParam(':patientPhoneNumber', $patientPhoneNumber);
@@ -81,8 +123,12 @@ class Database{
         //Fetch the result
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        //Return the result
-        return $result;
+        if($result){
+            //Return the result
+            return $result['patientId'];
+        } else {
+            return false;
+        }
     }
 
     //Signing up a new doctor
@@ -114,8 +160,12 @@ class Database{
         //Fetch the result
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        //Return the result
-        return $result;
+        if($result){
+            //Return the result
+            return $result['doctorId'];
+        } else {
+            return false;
+        }
     }
 
     //Signing up a new pharmacy
@@ -161,8 +211,12 @@ class Database{
         //Fetch the result
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        //Return the result
-        return $result;
+        if($result){
+            //Return the result
+            return $result['supervisorId'];
+        } else {
+            return false;
+        }
     }
 
     //Signing up a new Pharmaceutical company
@@ -196,47 +250,11 @@ class Database{
         $stmt->execute();
     }
 
-    //Checking if a user exists. Either a patient, doctor, supervisor
-    //Should return true or false depending on whether the user exists or not
-    /*function userExists($userName, $password, $table){
-        //Prepare statement
-        $stmt = $this->connection->prepare("SELECT * FROM $table WHERE :tableEmail = :userName AND :tablePassword = :password");
-        $stmt->bindParam(':table', $table);
-        $stmt->bindParam(':userName', $userName);
-        $stmt->bindParam(':password', $password);
-
-        //Execute statement
-        $stmt->execute();
-
-        //Fetch data
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        //Check if user exists
-        if($result){
-            return true;
-        }else{
-            return false;
-        }
-    }*/
-
     //Approve meds added to the database
     function approveMeds($drugID){
         //Prepare statement
         $stmt = $this->connection->prepare("UPDATE drugs SET approved = 1 WHERE drugID = :drugID");
         $stmt->bindParam(':drugID', $drugID);
-
-        //Execute statement
-        $stmt->execute();
-    }
-
-    //Giving a patient a prescription
-    function givePrescription($patientID, $doctorID, $drugID, $prescriptionDescription){
-        //Prepare statement
-        $stmt = $this->connection->prepare("INSERT INTO prescriptions (patientID, doctorID, drugID, prescriptionDescription) VALUES (:patientID, :doctorID, :drugID, :prescriptionDescription)");
-        $stmt->bindParam(':patientID', $patientID);
-        $stmt->bindParam(':doctorID', $doctorID);
-        $stmt->bindParam(':drugID', $drugID);
-        $stmt->bindParam(':prescriptionDescription', $prescriptionDescription);
 
         //Execute statement
         $stmt->execute();
@@ -257,11 +275,6 @@ class Database{
         return $result;
     }
 
-
-
-
-    
-
     //Viewing history of prescriptions by doctor
     function viewPrescriptionHistoryDoctor($doctorID){
         //Prepare statement
@@ -275,81 +288,6 @@ class Database{
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $result = $stmt->fetchAll();
         return $result;
-    }
-
-     /* 
-        TRIGGERS 
-     */
-
-    public function createTriggers(){
-
-        // Creating triggers for patients table so that when a patient is added, a patientId is generated and when a patient is deleted, the patientId is deleted from the database. Also, the patientId generated should have the format "P001" and should be incremented by 1 for every new patient added.
-        $stmt = $this->connection->prepare("CREATE TRIGGER patientIdGenerator BEFORE INSERT ON patients FOR EACH ROW
-        BEGIN
-            DECLARE patientId INT;
-            SET patientId = (SELECT COUNT(*) FROM patients);
-            SET patientId = patientId + 1;
-            SET NEW.patientId = CONCAT('P', LPAD(patientId, 3, '0'));
-        END");
-    
-        // Doing the same for doctors table
-        $stmt = $this->connection->prepare("CREATE TRIGGER doctorIdGenerator BEFORE INSERT ON doctors FOR EACH ROW
-        BEGIN
-            DECLARE doctorId INT;
-            SET doctorId = (SELECT COUNT(*) FROM doctors);
-            SET doctorId = doctorId + 1;
-            SET NEW.doctorId = CONCAT('D', LPAD(doctorId, 3, '0'));
-        END");
-        $stmt->execute();
-    
-        // Doing the same for supervisors table
-        $stmt = $this->connection->prepare("CREATE TRIGGER supervisorIdGenerator BEFORE INSERT ON supervisors FOR EACH ROW
-        BEGIN
-            DECLARE supervisorId INT;
-            SET supervisorId = (SELECT COUNT(*) FROM supervisors);
-            SET supervisorId = supervisorId + 1;
-            SET NEW.supervisorId = CONCAT('S', LPAD(supervisorId, 3, '0'));
-        END");
-        $stmt->execute();
-    
-        // Doing the same for pharmacies table
-        $stmt = $this->connection->prepare("CREATE TRIGGER pharmacyIdGenerator BEFORE INSERT ON pharmacies FOR EACH ROW
-        BEGIN
-            DECLARE pharmacyId INT;
-            SET pharmacyId = (SELECT COUNT(*) FROM pharmacies);
-            SET pharmacyId = pharmacyId + 1;
-            SET NEW.pharmacyId = CONCAT('PH', LPAD(pharmacyId, 3, '0'));
-        END");
-        $stmt->execute();
-    
-        // Doing the same for drugs table but the id has already been created so we modify it
-        $stmt = $this->connection->prepare("CREATE TRIGGER drugIdGenerator BEFORE INSERT ON drugs FOR EACH ROW
-        BEGIN
-            DECLARE drugId INT;
-            SET drugId = (SELECT COUNT(*) FROM drugs);
-            SET drugId = drugId + 1;
-            SET NEW.drugId = CONCAT('DR', LPAD(drugId, 3, '0'));
-        END");
-    
-        // Doing the same for pharmacenuticalCompanies table
-        $stmt = $this->connection->prepare("CREATE TRIGGER pharmacenuticalCompanyIdGenerator BEFORE INSERT ON pharmacenuticalCompanies FOR EACH ROW
-        BEGIN
-            DECLARE pharmacenuticalCompanyId INT;
-            SET pharmacenuticalCompanyId = (SELECT COUNT(*) FROM pharmacenuticalCompanies);
-            SET pharmacenuticalCompanyId = pharmacenuticalCompanyId + 1;
-            SET NEW.pharmacenuticalCompanyId = CONCAT('PC', LPAD(pharmacenuticalCompanyId, 3, '0'));
-        END");
-        $stmt->execute();
-    
-        // Doing the same for prescriptions table
-        $stmt = $this->connection->prepare("CREATE TRIGGER prescriptionIdGenerator BEFORE INSERT ON prescriptions FOR EACH ROW
-        BEGIN
-            DECLARE prescriptionId INT;
-            SET prescriptionId = (SELECT COUNT(*) FROM prescriptions);
-            SET prescriptionId = prescriptionId + 1;
-            SET NEW.prescriptionId = CONCAT('PR', LPAD(prescriptionId, 3, '0'));
-        END");
-        $stmt->execute();
     }
 
 }
