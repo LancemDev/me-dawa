@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Processing login details</title>
-</head>
-<body>
 <?php
 
 // Include the database connection file
@@ -39,7 +33,8 @@ if($entity === "Patient"){
         // Then redirect to the login page
         header("Location: ../view/login.view.php");
     } else {
-        echo "<script>alert('Please fill in all the fields')</script>";
+        echo "Please fill in all the fields";
+        header("Location: ../view/signup.view.php");
     }
 } else if($entity === "Doctor"){
     $doctorFirstName = $_POST['firstName'];
@@ -56,13 +51,14 @@ if($entity === "Patient"){
         $database->doctorSignup($doctorFirstName, $doctorSecondName, $doctorEmail, $doctorPassword, $doctorPhoneNumber, $doctorAddress, $doctorGender, $doctorDOB);
 
         // Get the generated doctor id and echo it
-        $doctorId = $database->getDoctorId($doctorEmail);
-        echo "<script>alert('Your doctor id is: " . $doctorId." Please use it to login.')</script>";
+        //$doctorId = $database->getDoctorId($doctorEmail);
+        echo "Please login now: ";
 
         // Then redirect to the login page
         header("Location: ../view/login.view.php");
     } else {
-        echo "<script>alert('Please fill in all the fields')</script>";
+        echo "PLease fill in all the fields";
+        header("Location: ../view/signup.view.php");
     }
 
 } else if($entity === "Supervisor"){
@@ -81,18 +77,16 @@ if($entity === "Patient"){
         $database->supervisorSignup($supervisorFirstName, $supervisorSecondName, $supervisorEmail, $supervisorPassword, $supervisorPhoneNumber, $supervisorAddress, $supervisorGender, $supervisorDOB);
 
         // Get the generated supervisor id and echo it
-        $supervisorId = $database->getSupervisorId($supervisorEmail);
-        echo "<script>alert('Your supervisor id is: " . $supervisorId." Please use it to login.')</script>";
+        //$supervisorId = $database->getSupervisorId($supervisorEmail);
+        echo "Login details have been sent to your email address. Please use them to login.";
 
         // Then redirect to the login page
         header("Location: ../view/login.view.php");
     } else {
-        echo "<script>alert('Please fill in all the fields')</script>";
+        echo "Please fill in all the fields";
+        header("Location: ../view/signup.view.php");
     }
 }
 
 // Redirect to view/login.view.php after 7 seconds
 //header('Refresh: 7; URL=../view/login.view.php');
-?>
-</body>
-</html>
