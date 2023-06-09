@@ -10,7 +10,10 @@ $database = new Database();
 // Get the type of entity selected from the options
 $entity = $_POST['entity'];
 
+echo "<script>alert('We are inside the signup.php file')</script>";
+
 if($entity === "Patient"){
+    echo "<script>alert('We are inside patient')</script>";
     // Get the details from the form
     $patientFirstName = $_POST['firstName'];
     $patientLastName = $_POST['lastName'];
@@ -25,16 +28,16 @@ if($entity === "Patient"){
     if(!empty($patientFirstName) && !empty($patientLastName) && !empty($patientEmail) && !empty($patientPassword) && !empty($patientPhoneNumber) && !empty($patientAddress) && !empty($patientGender) && !empty($patientDOB)){
         // Add the details to the database
         $database->patientSignup($patientFirstName, $patientLastName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB);
-
+        echo "<script>alert('Checkpoint 1')</script>";
         // Get the generated patient id and echo it
         $patientId = $database->getPatientId($patientEmail);
         echo "<script>alert('Your patient id is: " . $patientId." Please use it to login.')</script>";
 
         // Then redirect to the login page
-        header("Location: ../view/login.view.php");
+        header("Location: ../Templates/login.html");
     } else {
         echo "Please fill in all the fields";
-        header("Location: ../view/signup.view.php");
+        header("Location: ../Templates/signup.html");
     }
 } else if($entity === "Doctor"){
     $doctorFirstName = $_POST['firstName'];
@@ -55,10 +58,10 @@ if($entity === "Patient"){
         echo "Please login now: ";
 
         // Then redirect to the login page
-        header("Location: ../view/login.view.php");
+        header("Location: ../Templates/login.html");
     } else {
         echo "PLease fill in all the fields";
-        header("Location: ../view/signup.view.php");
+        header("Location: ../Templates/signup.html");
     }
 
 } else if($entity === "Supervisor"){
@@ -81,10 +84,10 @@ if($entity === "Patient"){
         echo "Login details have been sent to your email address. Please use them to login.";
 
         // Then redirect to the login page
-        header("Location: ../view/login.view.php");
+        header("Location: ../Templates/login.html");
     } else {
         echo "Please fill in all the fields";
-        header("Location: ../view/signup.view.php");
+        header("Location: ../Templates/signup.html");
     }
 }
 
