@@ -14,7 +14,7 @@ if (empty($drugID)) {
     // 
     $database->approveMeds($drugID);
     echo "<script>alert('Drug approved successfully')</script>";
-    echo "<script>window.location.href='../view/supervisor.view.php'</script>";
+    echo "<script>window.location.href='../Templates/supervisor.html'</script>";
 }
 
 

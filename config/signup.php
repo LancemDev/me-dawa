@@ -31,12 +31,15 @@ if($entity === "Patient"){
         echo "<script>alert('Checkpoint 1')</script>";
         // Get the generated patient id and echo it
         $patientId = $database->getPatientId($patientEmail);
-        echo "<script>alert('Your patient id is: " . $patientId." Please use it to login.')</script>";
+        
+        // Display the patient ID using JavaScript alert
+        echo "<script>alert('Your patient id is: " . $patientId . ". Please use it to login.');</script>";
 
-        // Then redirect to the login page
-        header("Location: ../Templates/login.html");
+        // Redirect to the login page after the alert is displayed
+        echo "<script>window.location.href = '../Templates/login.html';</script>";
+        exit();
     } else {
-        echo "Please fill in all the fields";
+        echo "<script>alert('Please fill in all the fields')</script>";
         header("Location: ../Templates/signup.html");
     }
 } else if($entity === "Doctor"){
@@ -52,13 +55,15 @@ if($entity === "Patient"){
     if(!empty($doctorFirstName) && !empty($doctorSecondName) && !empty($doctorEmail) && !empty($doctorPassword) && !empty($doctorPhoneNumber) && !empty($doctorAddress) && !empty($doctorGender) && !empty($doctorDOB)){
         // Add the details to the database
         $database->doctorSignup($doctorFirstName, $doctorSecondName, $doctorEmail, $doctorPassword, $doctorPhoneNumber, $doctorAddress, $doctorGender, $doctorDOB);
+        $doctorID = $database->getDoctorId($doctorEmail);
 
-        // Get the generated doctor id and echo it
-        //$doctorId = $database->getDoctorId($doctorEmail);
-        echo "Please login now: ";
+        // Display the doctor ID using JavaScript alert
+        echo "<script>alert('Your doctor id is: " . $doctorID . ". Please use it to login.');</script>";
 
-        // Then redirect to the login page
-        header("Location: ../Templates/login.html");
+
+        // Redirect to the login page after the alert is displayed
+        echo "<script>window.location.href = '../Templates/login.html';</script>";
+        exit();
     } else {
         echo "PLease fill in all the fields";
         header("Location: ../Templates/signup.html");
@@ -78,18 +83,17 @@ if($entity === "Patient"){
     if(!empty($supervisorFirstName) && !empty($supervisorSecondName) && !empty($supervisorEmail) && !empty($supervisorPassword) && !empty($supervisorPhoneNumber) && !empty($supervisorAddress) && !empty($supervisorGender) && !empty($supervisorDOB)){
         // Add the details to the database
         $database->supervisorSignup($supervisorFirstName, $supervisorSecondName, $supervisorEmail, $supervisorPassword, $supervisorPhoneNumber, $supervisorAddress, $supervisorGender, $supervisorDOB);
-
         // Get the generated supervisor id and echo it
-        //$supervisorId = $database->getSupervisorId($supervisorEmail);
-        echo "Login details have been sent to your email address. Please use them to login.";
+        $supervisorId = $database->getSupervisorId($supervisorEmail);
 
-        // Then redirect to the login page
-        header("Location: ../Templates/login.html");
+        // Display the supervisor ID using JavaScript alert
+        echo "<script>alert('Your supervisor id is: " . $supervisorId . ". Please use it to login.');</script>";
+
+        // Redirect to the login page after the alert is displayed
+        echo "<script>window.location.href = '../Templates/login.html';</script>";
+        exit();
     } else {
         echo "Please fill in all the fields";
         header("Location: ../Templates/signup.html");
     }
 }
-
-// Redirect to view/login.view.php after 7 seconds
-//header('Refresh: 7; URL=../view/login.view.php');
