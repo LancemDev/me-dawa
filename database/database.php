@@ -14,6 +14,7 @@ class Database{
 
         // Note that if you are viewing this code from the github repository, you will not be able to access the database
         // This is because the database credentials will be revoked by the cloud provider for security reasons
+        // Moved the db from the cloud to my localhost
         $this->username = "root";
         $this->password = "";
         $this->databaseName = "me-dawa";
@@ -359,6 +360,15 @@ class Database{
         $stmt->bindParam(':prescriptionNotes', $prescriptionNotes);
 
         //Execute statement
+        $stmt->execute();
+    }
+
+    // Removing drug from database using the prescriptionID
+    function dispense($prescriptionID){
+        $stmt = $this->connection->prepare("DELETE FROM drugs where prescriptionID = :prescriptionID");
+        $stmt->bindParam(':prescriptionID', $prescriptionID);
+
+        // Execute statement
         $stmt->execute();
     }
 }
