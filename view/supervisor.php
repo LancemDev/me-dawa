@@ -4,7 +4,7 @@
     <title>Supervisor Portal</title>
     <link rel="stylesheet" href="../Static/homepage.css">
     <link rel="stylesheet" href="../Static/form.scss">
-    <link rel="logo" href="../images/logo.jpg">
+    <link rel="icon" href="../images/logo.jpg">
 </head>
 <body>
 <!--The Navigation Bar-->
@@ -16,7 +16,12 @@
     <!-- NAVIGATION MENU -->
     <ul class="nav-links">
         <div class="menu">
-            <li><a href="../Templates/homepage.html">Home</a></li>
+        <li><?php 
+          session_start();
+          $username = $_SESSION['username'];
+          echo "Welcome, $username";
+          ?></li>
+            <li><a href="../view/homepage.php">Home</a></li>
             <li><a href="../config/signout.php">Sign Out</a></li>
         </div>
     </ul>

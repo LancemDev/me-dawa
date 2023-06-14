@@ -349,18 +349,24 @@ class Database{
     }
 
     // Add a new prescription
-    function addPrescription($patientID, $doctorID, $prescriptionDate, $prescriptionQuantity, $prescriptionDuration, $prescriptionNotes){
+    function addPrescription($patientID, $doctorID, $prescriptionDate, $prescriptionDuration, $prescriptionNotes){
         //Prepare statement
-        $stmt = $this->connection->prepare("INSERT INTO prescriptions (patientID, doctorID, prescriptionDate, prescriptionQuantity, prescriptionDuration, prescriptionNotes) VALUES (:patientID, :doctorID, :prescriptionDate, :prescriptionQuantity, :prescriptionDuration, :prescriptionNotes)");
+        $stmt = $this->connection->prepare("INSERT INTO prescriptions (patientID, doctorID, prescriptionDate, prescriptionDuration, prescriptionNotes) VALUES (:patientID, :doctorID, :prescriptionDate, :prescriptionDuration, :prescriptionNotes)");
         $stmt->bindParam(':patientID', $patientID);
         $stmt->bindParam(':doctorID', $doctorID);
         $stmt->bindParam(':prescriptionDate', $prescriptionDate);
-        $stmt->bindParam(':prescriptionQuantity', $prescriptionQuantity);
         $stmt->bindParam(':prescriptionDuration', $prescriptionDuration);
         $stmt->bindParam(':prescriptionNotes', $prescriptionNotes);
 
         //Execute statement
         $stmt->execute();
+
+        // If it works return true
+        if($stmt){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Removing drug from database using the prescriptionID
@@ -370,6 +376,27 @@ class Database{
 
         // Execute statement
         $stmt->execute();
+
+        if($stmt){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Get data from prescriptions table where patientID = patientID
+    function getPrescriptionHistoryForPatient($patientID){
+        //Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM prescriptions WHERE patientID = :patientID");
+        $stmt->bindParam(':patientID', $patientID);
+
+        //Execute statement
+        $stmt->execute();
+
+        //Fetch data
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+        return $result;
     }
 }
 ?>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharmacy SignUp</title>
     <link rel="stylesheet" href="../Static/form.scss">
-    <link rel="logo" href="../Static/logo.png">
+    <link rel="icon" href="../Static/logo.png">
 </head>
 <body>
     <div class="container">

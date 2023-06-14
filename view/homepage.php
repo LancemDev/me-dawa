@@ -23,8 +23,8 @@
 
         <!-- NAVIGATION MENUS -->
         <div class="menu">
-            <li><a href="./login.html">Login</a></li>
-            <li><a href="./signup.html">Sign Up</a></li>
+            <li><a href="./login.php">Login</a></li>
+            <li><a href="./signup.php">Sign Up</a></li>
         </div>
       </ul>
     </nav>

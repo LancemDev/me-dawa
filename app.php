@@ -6,14 +6,9 @@
 <body>
 <?php
 
-// Redirect to view/homepage.view.php
-header('Location: Templates/homepage.html');
+session_start();
 
-echo "A Splashscreen will be displayed here. Remember.";
-
-// Make this page delay for 5 seconds before redirecting to view/homepage.view.php
-header('Refresh: 5; URL=Templates/homepage.view.php');
-
+header("Location: ../me-dawa/view/loading.php");
 ?>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <title>Adding drugs</title>
     <link rel="stylesheet" href="../Static/form.scss">
     <link rel="stylesheet" href="../Static/homepage.css">
-    <link rel="logo" href="../images/logo.jpg">
+    <link rel="icon" href="../images/logo.jpg">
 </head>
 <body>
 
@@ -21,6 +21,13 @@
     <!-- NAVIGATION MENU -->
     <ul class="nav-links">
         <div class="menu">
+          <li>
+            <?php
+            session_start();
+            $username = $_SESSION['username']; 
+            echo "Welcome, $username";
+            ?>
+            </li>
             <li><a href="">Home</a></li>
             <li><a href="">Sign Out</a></li>
         </div>

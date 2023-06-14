@@ -14,8 +14,8 @@
     
     /* LOGO */
     .logo {
-    margin-left: 10px;
-
+    font-size: 24px;
+    font-weight: 600;
     }
     
     /* NAVBAR MENU */
@@ -123,7 +123,7 @@
     background-image: url("../images/cPics/pexels-pixabay-356040.jpg");
     transform: rotateY(120deg) translateZ(430px); }
   .carousel__face:nth-child(5) { 
-    background-image: url("../images/cPics/pexels-pixabay-356040.jpg");
+    background-image: url("../images/cPics/zz.jpg");
    transform: rotateY(160deg) translateZ(430px); }
   .carousel__face:nth-child(6) { 
     background-image: url("../images/cPics/pexels-rfstudio-3825529.jpg");

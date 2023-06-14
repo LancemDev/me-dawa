@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Patient Portal</title>
+    <title>Doctor Portal</title>
     <link rel="stylesheet" href="../Static/homepage.css">
     <link rel="stylesheet" href="../Static/form.scss">
-    <link rel="logo" href="../images/logo.jpg">
+    <link rel="icon" href="../images/logo.jpg">
 </head>
 <body>
 <!--The Navigation Bar-->
@@ -13,12 +13,16 @@
     <!-- LOGO -->
     <div class="logo">Me-Dawa</div>
 
-    <!--Centered name-->
-
-
     <!-- NAVIGATION MENU -->
     <ul class="nav-links">
         <div class="menu">
+          <li>
+            <?php
+            session_start();
+            $username = $_SESSION['username'];
+            echo "Welcome, $username";
+            ?>
+            </li>
             <li><a href="../Templates/homepage.html">Home</a></li>
             <li><a href="../config/signout.php">Sign Out</a></li>
         </div>
@@ -26,13 +30,36 @@
 </nav>
 </div>
 
-<div>
-    <p class="card">
-        Welcome to the patients portal
-    </p>
+<div class="container">
+	<!-- code here -->
+	<div class="card">
+		<div class="card-image">	
+			<h2 class="card-heading">
+				Welcome Doc<br>
+				<small>Add Prescription</small>
+			</h2>
+		</div>
+		  <form class="card-form" method="post" action="../config/doctor.php">
+			  <div class="input">
+				  <input type="number" class="input-field" name="patientID"  required/>
+				  <label class="input-label">Patient ID</label>
+			  </div>
+        <div class="input">
+          <input type="text" class="input-field" name="prescriptionDescription" required/>
+          <label class="input-label">Prescription Description</label>
+        </div>
+        <div class="input">
+				  <input type="date" class="input-field" name="prescriptionDuration"  required/>
+				  <label class="input-label">Prescription Duration</label>
+			  </div>   
+        <div class="action">
+          <input type="submit" class="action-button" value="Add Prescription" />
+        </div>
+      </form>
+	</div>
 </div>
 
-
+<!--The footer-->
 <footer class="footer">
     <div class="footer-container">
       <div class="row">
@@ -64,6 +91,3 @@
       </div>
     </div>
   </footer>
-
-</body>
-</html>
