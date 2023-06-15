@@ -155,7 +155,7 @@
   .container {
     max-width: 800px;
     margin: 0 auto;
-    padding-top: 500px;
+    /*padding-top: 500px;*/
     padding-bottom: 10px;
   }
   
@@ -256,5 +256,10 @@
     margin: 0 auto;
     padding-top: 500px;
     padding-bottom: 10px;
+  }
+
+  .body{
+    background-image: url("../images/cPics/pexels-pixabay-139398.jpg");
+    margin: 0%;
   }
   

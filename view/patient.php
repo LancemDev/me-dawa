@@ -20,7 +20,6 @@
           <div class="menu">
             <li>
               <?php 
-              session_start();
               $username = $_SESSION['username'];
               echo "Welcome, $username";
               ?>

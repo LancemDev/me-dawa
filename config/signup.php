@@ -35,7 +35,7 @@ if($entity === "Patient"){
         echo "<script>window.location.href = '../view/login.php';</script>";
         exit();
     } else {
-        echo "<script>alert('Please fill in all the fields')</script>";
+        echo "<script>alert('Please fill in all the fields');</script>";
         header("Location: ../view/signup.php");
     }
 } else if($entity === "Doctor"){
