@@ -10,10 +10,7 @@ $database = new Database();
 // Get the type of entity selected from the options
 $entity = $_POST['entity'];
 
-echo "<script>alert('We are inside the signup.php file')</script>";
-
 if($entity === "Patient"){
-    echo "<script>alert('We are inside patient')</script>";
     // Get the details from the form
     $patientFirstName = $_POST['firstName'];
     $patientLastName = $_POST['lastName'];
@@ -28,7 +25,6 @@ if($entity === "Patient"){
     if(!empty($patientFirstName) && !empty($patientLastName) && !empty($patientEmail) && !empty($patientPassword) && !empty($patientPhoneNumber) && !empty($patientAddress) && !empty($patientGender) && !empty($patientDOB)){
         // Add the details to the database
         $database->patientSignup($patientFirstName, $patientLastName, $patientEmail, $patientPassword, $patientPhoneNumber, $patientAddress, $patientGender, $patientDOB);
-        echo "<script>alert('Checkpoint 1')</script>";
         // Get the generated patient id and echo it
         $patientId = $database->getPatientId($patientEmail);
         
@@ -36,11 +32,11 @@ if($entity === "Patient"){
         echo "<script>alert('Your patient id is: " . $patientId . ". Please use it to login.');</script>";
 
         // Redirect to the login page after the alert is displayed
-        echo "<script>window.location.href = '../Templates/login.html';</script>";
+        echo "<script>window.location.href = '../view/login.php';</script>";
         exit();
     } else {
         echo "<script>alert('Please fill in all the fields')</script>";
-        header("Location: ../Templates/signup.html");
+        header("Location: ../view/signup.php");
     }
 } else if($entity === "Doctor"){
     $doctorFirstName = $_POST['firstName'];
@@ -62,11 +58,11 @@ if($entity === "Patient"){
 
 
         // Redirect to the login page after the alert is displayed
-        echo "<script>window.location.href = '../Templates/login.html';</script>";
+        echo "<script>window.location.href = '../view/login.php';</script>";
         exit();
     } else {
         echo "PLease fill in all the fields";
-        header("Location: ../Templates/signup.html");
+        header("Location: ../view/signup.php");
     }
 
 } else if($entity === "Supervisor"){
@@ -90,10 +86,10 @@ if($entity === "Patient"){
         echo "<script>alert('Your supervisor id is: " . $supervisorId . ". Please use it to login.');</script>";
 
         // Redirect to the login page after the alert is displayed
-        echo "<script>window.location.href = '../Templates/login.html';</script>";
+        echo "<script>window.location.href = '../view/login.php';</script>";
         exit();
     } else {
         echo "Please fill in all the fields";
-        header("Location: ../Templates/signup.html");
+        header("Location: ../view/signup.php");
     }
 }

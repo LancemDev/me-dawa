@@ -16,13 +16,13 @@ if (!empty($pharmacyName) && !empty($pharmacyEmail) && !empty($pharmacyPassword)
     // Check if the user exists and if they do, redirect them to views/patient.view.php
     if ($database->pharmacyExists($pharmacyEmail, $pharmacyPassword)) {
         echo "<script>alert('Pharmacy already exists')</script>";
-        echo "<script>window.location.href='../Templates/pharmacySignup.html'</script>";
+        echo "<script>window.location.href='../view/pharmacySignup.php'</script>";
     } else {
         $database->pharmacySignup($pharmacyName, $pharmacyEmail, $pharmacyPassword, $pharmacyPhoneNumber, $pharmacyAddress);
         echo "<script>alert('Pharmacy added successfully')</script>";
-        echo "<script>window.location.href='../Templates/pharmacy.html'</script>";
+        echo "<script>window.location.href='../view/pharmacy.php'</script>";
     }
 } else {
     echo "<script>alert('Please fill in all the fields')</script>";
-    echo "<script>window.location.href='../Templates/pharmacySignup.html'</script>";
+    echo "<script>window.location.href='../view/pharmacySignup.php'</script>";
 }

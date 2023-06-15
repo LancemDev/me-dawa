@@ -16,7 +16,7 @@ if (!empty($companyName) && !empty($companyEmailAddress) && !empty($companyPassw
     // Check if the company exists and if they do, redirect them to views/company.view.php
     if ($database->companyExists($companyEmailAddress, $companyPassword)) {
         echo "<script>alert('Company already exists')</script>";
-        echo "<script>window.location.href='../Templates/companySignup.html'</script>";
+        echo "<script>window.location.href='../view/companySignup.php'</script>";
     } else {
         // Add the company to the database
         $database->companySignup($companyName, $companyEmailAddress, $companyPassword, $companyPhoneNumber, $companyAddress);
@@ -25,9 +25,9 @@ if (!empty($companyName) && !empty($companyEmailAddress) && !empty($companyPassw
         $companyId = $database->getCompanyId($companyEmailAddress);
         // Then display the id to the user
         echo "<script>alert('Your company id is: $companyId')</script>";
-        echo "<script>window.location.href='../Templates/login.html'</script>";
+        echo "<script>window.location.href='../view/login.php'</script>";
     }
 } else {
     echo "<script>alert('Please fill in all the fields')</script>";
-    echo "<script>window.location.href='../Templates/companySignup.html'</script>";
+    echo "<script>window.location.href='../view/companySignup.php'</script>";
 }
