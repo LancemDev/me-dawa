@@ -66,9 +66,9 @@
             </div>
         </form>
         <div class="card-info">
-			<p>Already have an account? <a href="../Templates/login.html">Login</a></p>
-            <p>For your Pharmaceutical company, signup <a href="../Templates/companySignup.html">here</a></p>
-			<p>For your Pharmacy, signup <a href="../Templates/pharmacySignUp.html">here</a></p>
+			<p>Already have an account? <a href="../view/login.php">Login</a></p>
+            <p>For your Pharmaceutical company, signup <a href="../view/companySignup.php">here</a></p>
+			<p>For your Pharmacy, signup <a href="../view/pharmacySignUp.php">here</a></p>
         </div>
 	</div>
 </div>

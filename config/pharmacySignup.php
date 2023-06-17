@@ -20,7 +20,9 @@ if (!empty($pharmacyName) && !empty($pharmacyEmail) && !empty($pharmacyPassword)
     } else {
         $database->pharmacySignup($pharmacyName, $pharmacyEmail, $pharmacyPassword, $pharmacyPhoneNumber, $pharmacyAddress);
         echo "<script>alert('Pharmacy added successfully')</script>";
-        echo "<script>window.location.href='../view/pharmacy.php'</script>";
+        $pharmacyID = $database->getPharmacyID($pharmacyEmail);
+        echo "<script>alert('Your pharmacy id is: " . $pharmacyID . ". Please use it to login.');</script>";
+        echo "<script>window.location.href='../view/login.php'</script>";
     }
 } else {
     echo "<script>alert('Please fill in all the fields')</script>";

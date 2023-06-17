@@ -291,6 +291,24 @@ class Database{
         }
     }
 
+    // get the pharmacyID from pharmacies
+    function getPharmacyID($pharmacyEmail){
+        $stmt = $this->connection->prepare("SELECT ID FROM pharmacies WHERE pharmacyEmail = :pharmacyEmail");
+        $stmt->bindParam(':pharmacyEmail', $pharmacyEmail);
+
+        // Execute statement
+        $stmt->execute();
+
+        // Fetch the result
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($result){
+            return $result['ID'];
+        } else {
+            return false;
+        }
+    }
+
 
     //Adding meds to the database (Pharmaceuticals)
     function addMeds($drugName, $drugDescription, $drugPrice, $drugQuantity, $drugExpirationDate, $drugManufacturingDate, $drugCompany){
