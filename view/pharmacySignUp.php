@@ -9,7 +9,7 @@
     <link rel="icon" href="../Static/logo.png">
 </head>
 <body>
-    <div class="container">
+    <div>
         <!-- code here -->
         <div class="card">
             <div class="card-image">	
