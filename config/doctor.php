@@ -22,18 +22,18 @@ if (!empty($patientID) && !empty($prescriptionDescription)) {
         // Add the prescription to the database
         if ($database->addPrescription($patientID, $doctorID, $prescriptionDate, $prescriptionDuration, $prescriptionDescription)) {
             echo "<script>alert('Prescription added successfully. The patient can now view the prescription.')</script>";
-            echo "<script>window.location.href='../Templates/doctor.html'</script>";
+            echo "<script>window.location.href='../view/doctor.php'</script>";
         } else {
             echo "<script>alert('Prescription not added')</script>";
-            echo "<script>window.location.href='../Templates/doctor.html'</script>";
+            echo "<script>window.location.href='../view/doctor.php'</script>";
         }
     } else {
         echo "<script>alert('Doctor not logged in')</script>";
-        echo "<script>window.location.href='../Templates/doctor.html'</script>";
+        echo "<script>window.location.href='../view/doctor.php'</script>";
     }
 } else {
     echo "<script>alert('Please fill in all the fields')</script>";
-    echo "<script>window.location.href='../Templates/doctor.html'</script>";
+    echo "<script>window.location.href='../view/doctor.php'</script>";
 }
 
 ?>

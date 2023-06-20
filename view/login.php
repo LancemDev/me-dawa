@@ -32,6 +32,7 @@
             </div>
             <div class="input">
                 <select name="entity" id="entity" class="input-field" value="">
+                    <option value="" class="input">Select Entity</option>
                     <option value="Doctor" class="input">Doctor</option>
                     <option value="Patient" class="input">Patient</option>
                     <option value="Supervisor" class="input">Supervisor</option>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../Static/homepage.css">
     <link rel="stylesheet" href="../Static/form.scss">
 	<link rel="icon" href="../images/logo.jpg">
     <title>Sign Up</title>
@@ -11,7 +12,7 @@
 <body>
     <!--Sign Up form for patients, doctors and supervisors having the firstName, lastName, password, emailaddress, residence, gender and a dropdown list having values patient, supervisor and doctor-->
 
-    <div class="container">
+   <div class="container">
 	<!-- code here -->
 	<div class="card">
 		<div class="card-image">	

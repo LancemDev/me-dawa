@@ -2,35 +2,67 @@
 <html>
 <head>
     <title>Doctor Portal</title>
-    <link rel="stylesheet" href="../Static/homepage.css">
     <link rel="stylesheet" href="../Static/form.scss">
+    <link rel="stylesheet" href="../Static/homepage.css">
+    <link rel="stylesheet" href="../Static/profile.scss">
     <link rel="icon" href="../images/logo.jpg">
 </head>
 <body>
+  <div class="body">
 <!--The Navigation Bar-->
 <div>
-<nav class="navbar">
-    <!-- LOGO -->
-    <div class="logo">Me-Dawa</div>
+  <nav class="navbar">
+      <!-- LOGO -->
+      <div class="logo">Me-Dawa</div>
 
-    <!-- NAVIGATION MENU -->
-    <ul class="nav-links">
-        <div class="menu">
-          <li>
-            <?php
-            session_start();
-            $username = $_SESSION['username'];
-            echo "Welcome, $username";
-            ?>
-            </li>
-            <li><a href="../Templates/homepage.html">Home</a></li>
-            <li><a href="../config/signout.php">Sign Out</a></li>
-        </div>
-    </ul>
-</nav>
+      <!-- NAVIGATION MENU -->
+      <ul class="nav-links">
+          <div class="menu">
+            <li>
+              <?php 
+              session_start();
+              $username = $_SESSION['username'];
+              echo "Welcome, $username";
+              ?>
+              </li>
+              <li><a href="../Templates/homepage.html">Home</a></li>
+              <li><a href="../config/signout.php">Sign Out</a></li>
+          </div>
+      </ul>
+  </nav>
 </div>
 
-<div class="container">
+<div>
+  <article class="profile">
+    <div class="profile-image">
+      <img src="https://assets.codepen.io/285131/neongirl.jpg" />
+    </div>
+    <h2 class="profile-username">Lance Munyao</h2>
+    <small class="profile-user-handle">@elena_zoldado</small>
+    <div class="profile-actions">
+      <button class="btn btn--primary">Follow</button>
+      <button class="btn btn--icon">
+        <i class="ph-export"></i>
+      </button>
+      <button class="btn btn--icon">
+        <i class="ph-dots-three-outline-fill"></i>
+      </button>
+    </div>
+    <div class="profile-links">
+      <a href="#" class="link link--icon">
+        <i class="ph-twitter-logo"></i>
+      </a>
+      <a href="#" class="link link--icon">
+        <i class="ph-facebook-logo"></i>
+      </a>
+      <a href="#" class="link link--icon">
+        <i class="ph-instagram-logo"></i>
+      </a>
+    </div>
+  </article>
+</div>
+
+<div class="">
 	<!-- code here -->
 	<div class="card">
 		<div class="card-image">	
@@ -91,3 +123,6 @@
       </div>
     </div>
   </footer>
+</div>
+</body>
+</html>
