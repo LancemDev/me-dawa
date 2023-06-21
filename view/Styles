@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supervisor Portal</title>
+    <link rel="stylesheet" href="../Static/homepage.css">
+    <link rel="stylesheet" href="../Static/form.scss">
+    <link rel="icon" href="../images/logo.jpg">
+    <style>
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            padding: 8px 16px;
+            text-decoration: none;
+            color: black;
+            background-color: #f2f2f2;
+            margin: 0 5px;
+            border-radius: 4px;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<!--The Navigation Bar-->
+<div>
+    <nav class="navbar">
+        <!-- LOGO -->
+        <div class="logo">Me-Dawa</div>
+
+        <!-- NAVIGATION MENU -->
+        <ul class="nav-links">
+            <div class="menu">
+                <li><?php
+                    session_start();
+                    $username = $_SESSION['username'];
+                    echo "Welcome, $username";
+                    ?></li>
+                <li><a href="../view/homepage.php">Home</a></li>
+                <li><a href="../config/signout.php">Sign Out</a></li>
+            </div>
+        </ul>
+    </nav>
+</div>
+
+<div class="">
+    <!-- code here -->
+    <div class="card">
+        <div class="card-image">
+            <h2 class="card-heading">
+                Welcome back<br>
+                <small>Approve drugs</small>
+            </h2>
+        </div>
+        <form class="card-form" method="post" action="../config/supervisor.php">
+            <div class="input">
+                <input type="number" class="input-field" name="drugID" required/>
+                <label class="input-label">Drug ID</label>
+            </div>
+            <div class="action">
+                <input type="submit" class="action-button" value="Approve" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- The content of the page for supervisor-->
+<div class="content">
+    <div class="content-container">
+        <div class="row">
+            <div class="content-col">
+                <h3>Supervisor Portal</h3>
+                <p>Here, you can approve drugs.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Retrieve users from the database and display them in the table
+                        $servername = "your_servername";
+                        $username = "your_username";
+                        $password = "your_password";
+                        $database = "your_database";
+
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password, $database);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                        }
+
+                        // Pagination variables
+                        $results_per_page = 10;
+                        $current_page = isset($_GET['page']) ? $_GET['
