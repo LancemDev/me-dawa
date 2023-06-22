@@ -107,6 +107,7 @@ if ($entity === "Pharmaceutical") {
 
             $_SESSION['entity'] = $entity;
             $_SESSION['username'] = $username;
+            echo "<script>alert('Login Successful. Welcome');</script>";
             header("Location: ../view/company.php");
         } else {
             echo "<script>alert('User does not exist')</script>";
@@ -131,6 +132,7 @@ if ($entity === "Pharmacy"){
 
             $_SESSION['entity'] = $entity;
             $_SESSION['username'] = $username;
+            echo "<script>alert('Login Successful. Welcome');</script>";
             header("Location: ../view/pharmacy.php");
         } else {
             echo "<script>alert('User does not exist')</script>";
