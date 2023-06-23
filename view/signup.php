@@ -12,7 +12,7 @@
 <body>
     <!--Sign Up form for patients, doctors and supervisors having the firstName, lastName, password, emailaddress, residence, gender and a dropdown list having values patient, supervisor and doctor-->
 
-   <div class="container">
+   <div>
 	<!-- code here -->
 	<div class="card">
 		<div class="card-image">	

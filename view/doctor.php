@@ -31,7 +31,7 @@
       </ul>
   </nav>
 </div>
-
+<!--
 <div>
   <article class="profile">
     <div class="profile-image">
@@ -59,10 +59,10 @@
         <i class="ph-instagram-logo"></i>
       </a>
     </div>
-  </article>
+  </article> -->
 </div>
 
-<div class="">
+<div>
 	<!-- code here -->
 	<div class="card">
 		<div class="card-image">	
