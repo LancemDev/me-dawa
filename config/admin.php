@@ -1,51 +1,56 @@
 <?php
-    // PHP code to display the Users section
-    $usersPerPage = 5; // Number of users to display per page
-    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1; // Current page number
+// Database connection details
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "me-dawa";
 
-    // Fetch users from the database using your preferred method (e.g., database query)
-    // Replace this code with your actual database fetching logic
-    $totalUsers = 50; // Total number of users in the database
-    $totalPages = ceil($totalUsers / $usersPerPage); // Calculate total pages
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Simulated user data for demonstration purposes
-    $users = [
-        ['id' => 1, 'name' => 'John Doe'],
-        ['id' => 2, 'name' => 'Jane Smith'],
-        ['id' => 3, 'name' => 'Alice Johnson'],
-        // ... Fetch more users from the database
-    ];
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-    // Calculate start and end indices of users to display based on current page
-    $startIndex = ($currentPage - 1) * $usersPerPage;
-    $endIndex = min($startIndex + $usersPerPage - 1, $totalUsers - 1);
+// Edit User
+if (isset($_POST['edit'])) {
+    $username = $_POST['username'];
+    $role = $_POST['role'];
 
-    // Display users in a table
-    echo '<h2>Users</h2>';
-    echo '<table>';
-    echo '<tr><th>ID</th><th>Name</th><th>Action</th></tr>';
-    for ($i = $startIndex; $i <= $endIndex; $i++) {
-        $user = $users[$i];
-        echo '<tr>';
-        echo '<td>' . $user['id'] . '</td>';
-        echo '<td>' . $user['name'] . '</td>';
-        echo '<td><form method="POST" action="index.php?page=' . $currentPage . '"><input type="hidden" name="delete_user_id" value="' . $user['id'] . '"><input class="delete-btn" type="submit" value="Delete"></form></td>';
-        echo '</tr>';
+    // Update the user record in the database
+    $sql = "UPDATE users SET role='$role' WHERE username='$username'";
+    if ($conn->query($sql) === TRUE) {
+        echo "User updated successfully.";
+    } else {
+        echo "Error updating user: " . $conn->error;
     }
-    echo '</table>';
+}
 
-    // Pagination links
-    echo '<div class="pagination">';
-    for ($page = 1; $page <= $totalPages; $page++) {
-        echo '<a href="index.php?section=users&page=' . $page . '"' . ($page == $currentPage ? ' class="active"' : '') . '>' . $page . '</a>';
-    }
-    echo '</div>';
+// Delete User
+if (isset($_POST['delete'])) {
+    $username = $_POST['username'];
 
-    // Handle user deletion
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user_id'])) {
-        $deletedUserId = $_POST['delete_user_id'];
-        // Code to delete the user from the database based on the provided ID
-        // Add your own logic here to handle the deletion
-        echo 'User with ID ' . $deletedUserId . ' has been deleted.';
+    // Delete the user record from the database
+    $sql = "DELETE FROM users WHERE username='$username'";
+    if ($conn->query($sql) === TRUE) {
+        echo "User deleted successfully.";
+    } else {
+        echo "Error deleting user: " . $conn->error;
     }
+}
+
+// Fetch Existing Users
+$sql = "SELECT * FROM users";
+$result = $conn->query($sql);
+$users = array();
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $users[] = $row;
+    }
+}
+
+// Close the database connection
+$conn->close();
 ?>

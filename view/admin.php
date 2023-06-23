@@ -1,45 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../Static/admin.css">
+    <title>Admin Panel</title>
 </head>
 <body>
-    <div id="sidebar">
-        <h2>Navigation</h2>
-        <ul>
-            <li><a href="?section=users">Users</a></li>
-            <li><a href="?section=orders">Orders</a></li>
-            <li><a href="?section=products">Products</a></li>
-        </ul>
-    </div>
-    <div id="content">
-        <h1>Welcome to the Admin Dashboard</h1>
-        <?php
-            include '../config/admin.php'; // Include the admin configuration file
-            // Include the appropriate section file based on the selected section
-            $section = isset($_GET['section']) ? $_GET['section'] : 'users';
+    <h1>Admin Panel</h1>
 
-            session_start(); // Start the session
+    <h2>Edit User</h2>
+    <form action="admin.php" method="post">
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" required><br><br>
+        <label for="adminFirstName">First Name:</label>
+        <input type="text" id="adminFirstName" name="adminFirstName" required><br><br>
+        <label for="adminLastName">Last Name:</label>
+        <input type="text" id="adminLastName" name="adminLastName" required><br><br>
+        <label for="adminEmail">Email:</label>
+        <input type="email" id="adminEmail" name="adminEmail" required><br><br>
+        <label for="adminPassword">Password:</label>
+        <input type="password" id="adminPassword" name="adminPassword" required><br><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+            <option value="supervisor">Supervisor</option>
+            <option value="pharmacy">Pharmacy</option>
+        </select><br><br>
+        <input type="submit" name="edit" value="Edit User">
+    </form>
 
-            // Store the selected section in the session
-            $_SESSION['section'] = $section;
+    <h2>Delete User</h2>
+    <form action="admin.php" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <input type="submit" name="delete" value="Delete User">
+    </form>
 
-            switch ($section) {
-                case 'users':
-                    include 'users.php';
-                    break;
-                case 'orders':
-                    include 'orders.php';
-                    break;
-                case 'products':
-                    include 'products.php';
-                    break;
-                default:
-                    echo '<p>Invalid section selected.</p>';
-                    break;
-            }
-        ?>
-    </div>
+    <h2>Existing Users</h2>
+    <?php include 'admin.php'; ?>
+    <?php if (!empty($users)): ?>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Username</th>
+                <th>Role</th>
+            </tr>
+            <?php foreach ($users as $user): ?>
+                <tr>
+                    <td><?php echo $user['id']; ?></td>
+                    <td><?php echo $user['adminFirstName']; ?></td>
+                    <td><?php echo $user['adminLastName']; ?></td>
+                    <td><?php echo $user['adminEmail']; ?></td>
+                    <td><?php echo $user['adminPassword']; ?></td>
+                    <td><?php echo $user['username']; ?></td>
+                    <td><?php echo $user['role']; ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php else: ?>
+        <p>No users found.</p>
+    <?php endif; ?>
 </body>
 </html>
