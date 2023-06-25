@@ -7,7 +7,7 @@
     <h1>Admin Panel</h1>
 
     <h2>Edit User</h2>
-    <form action="admin.php" method="post">
+    <form action="admin.php" method="post" class="card-form">
         <label for="id">ID:</label>
         <input type="text" id="id" name="id" required><br><br>
         <label for="adminFirstName">First Name:</label>
@@ -33,7 +33,7 @@
     </form>
 
     <h2>Delete User</h2>
-    <form action="admin.php" method="post">
+    <form action="admin.php" method="post" class="card-form">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>
         <input type="submit" name="delete" value="Delete User">
