@@ -416,5 +416,51 @@ class Database{
         $result = $stmt->fetchAll();
         return $result;
     }
+
+    // fetch users from the database based on the entity and pagination
+    function getUsersByEntity($entity, $start_index, $results_per_page){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM $entity LIMIT :start_index, :results_per_page");
+        $stmt->bindParam(':start_index', $start_index, PDO::PARAM_INT);
+        $stmt->bindParam(':results_per_page', $results_per_page, PDO::PARAM_INT);
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    
+    // Get total number of users for the entity
+    function getTotalUsersByEntity($entity){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT COUNT(*) FROM $entity");
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetchColumn();
+        return $result;
+    }
+
+    // delete entity from the database
+    function deleteEntity($entity, $ID){
+        // Prepare statement
+        $stmt = $this->connection->prepare("DELETE FROM $entity WHERE ID = :ID");
+        $stmt->bindParam(':ID', $ID);
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // If it works return true
+        if($stmt){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }
 ?>
