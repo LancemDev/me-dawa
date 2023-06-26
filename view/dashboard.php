@@ -2,19 +2,18 @@
 <html>
 <head>
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" type="text/css" href="../Static/dashboard.css">
   <link rel="icon" href="../images/logo.jpg">
 </head>
 <body>
-  <div class="container">
-    <div class="sidebar">
-      <ul>
-        <li><a href="dashboard.php?entity=patients">Patients</a></li>
-        <li><a href="dashboard.php?entity=doctors">Doctors</a></li>
-        <li><a href="dashboard.php?entity=supervisors">Supervisors</a></li>
+  <div style="display: flex;">
+    <div style="width: 200px; background-color: #f2f2f2;">
+      <ul style="list-style-type: none; padding: 0;">
+        <li style="margin-bottom: 10px;"><a href="dashboard.php?entity=patients" style="text-decoration: none; color: #333;">Patients</a></li>
+        <li style="margin-bottom: 10px;"><a href="dashboard.php?entity=doctors" style="text-decoration: none; color: #333;">Doctors</a></li>
+        <li style="margin-bottom: 10px;"><a href="dashboard.php?entity=supervisors" style="text-decoration: none; color: #333;">Supervisors</a></li>
       </ul>
     </div>
-    <div class="content">
+    <div style="flex-grow: 1; padding: 20px;">
       <h2>Admin Dashboard</h2>
       <?php
       session_start();
@@ -36,19 +35,20 @@
         $users = $database->getUsersByEntity($entity, $start_index, $results_per_page);
 
         // Display users in a table
-        echo '<table>
+        echo '
+        <table style="width: 100%; border-collapse: collapse;">
                 <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Email</th>
+                  <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">ID</th>
+                  <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Name</th>
+                  <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Email</th>
                   <!-- Additional columns here -->
                 </tr>';
         if($entity === 'patients'){
           foreach ($users as $user) {
             echo '<tr>
-                    <td>' . $user['ID'] . '</td>
-                    <td>' . $user['patientFirstName'] . '</td>
-                    <td>' . $user['patientEmail'] . '</td>
+                    <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">' . $user['ID'] . '</td>
+                    <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">' . $user['patientFirstName'] . '</td>
+                    <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">' . $user['patientEmail'] . '</td>
                     <!-- Additional columns here -->
                   </tr>';
           }
@@ -56,9 +56,9 @@
         else if($entity === 'doctors'){
           foreach ($users as $user) {
             echo '<tr>
-                    <td>' . $user['ID'] . '</td>
-                    <td>' . $user['doctorFirstName'] . '</td>
-                    <td>' . $user['doctorEmail'] . '</td>
+                    <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">' . $user['ID'] . '</td>
+                    <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">' . $user['doctorFirstName'] . '</td>
+                    <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">' . $user['doctorEmail'] . '</td>
                     <!-- Additional columns here -->
                   </tr>';
           }
@@ -66,9 +66,9 @@
         else if($entity === 'supervisors'){
           foreach ($users as $user) {
             echo '<tr>
-                    <td>' . $user['ID'] . '</td>
-                    <td>' . $user['supervisorFirstName'] . '</td>
-                    <td>' . $user['supervisorEmail'] . '</td>
+                    <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">' . $user['ID'] . '</td>
+                    <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">' . $user['supervisorFirstName'] . '</td>
+                    <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">' . $user['supervisorEmail'] . '</td>
                     <!-- Additional columns here -->
                   </tr>';
           }
@@ -80,27 +80,27 @@
         $total_results = $database->getTotalUsersByEntity($entity); // Get total number of users for the entity
         $total_pages = ceil($total_results / $results_per_page); // Calculate total number of pages
 
-        echo '<div class="pagination">';
+        echo '<div style="margin-top: 20px;">';
 
         // Previous page link
         if ($current_page > 1) {
-          echo '<a href="dashboard.php?entity=' . $entity . '&page=' . ($current_page - 1) . '">Previous</a>';
+          echo '<a href="dashboard.php?entity=' . $entity . '&page=' . ($current_page - 1) . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">Previous</a>';
         }
 
         // Page numbers
         for ($i = 1; $i <= $total_pages; $i++) {
-          echo '<a href="dashboard.php?entity=' . $entity . '&page=' . $i . '">' . $i . '</a>';
+          echo '<a href="dashboard.php?entity=' . $entity . '&page=' . $i . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">' . $i . '</a>';
         }
 
         // Next page link
         if ($current_page < $total_pages) {
-          echo '<a href="dashboard.php?entity=' . $entity . '&page=' . ($current_page + 1) . '">Next</a>';
+          echo '<a href="dashboard.php?entity=' . $entity . '&page=' . ($current_page + 1) . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">Next</a>';
         }
 
         echo '</div>';
 
         // Form to delete user
-        echo '<form method="post" action="../config/dashboard.php">
+        echo '<form method="post" action="../config/dashboard.php" style="margin-top: 20px;">
                 <label for="user_id">Enter User ID to delete:</label>
                 <input type="text" name="user_id" id="user_id" required>
                 <input type="submit" value="Delete">
