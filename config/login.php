@@ -21,7 +21,7 @@ $database = new Database();
     // $entity = $_POST['entity']; // It should be passed as an argument instead
 
     // Depending on the entity, get the details from the form
-if ($entity === "Patient") {
+if ($entity === "patients") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -35,7 +35,7 @@ if ($entity === "Patient") {
             $_SESSION['username'] = $username;
             include '../view/patient.php';
             // get id of patient and store in session and display it as a js alert
-            header("Location: ../view/patient.php");
+            echo "<script>window.location.href='../view/patient.php'</script>";
         } else {
             echo "<script>alert('User does not exist')</script>";
             echo "<script>window.location.href='../view/login.php'</script>";
@@ -46,7 +46,7 @@ if ($entity === "Patient") {
     }
 }
 
-if ($entity === "Doctor") {
+if ($entity === "doctors") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -59,7 +59,7 @@ if ($entity === "Doctor") {
 
             $_SESSION['entity'] = $entity;
             $_SESSION['username'] = $username;
-            header("Location: ../view/doctor.php");
+            echo "<script>window.location.href='../view/doctor.php'</script>";
         } else {
             echo "<script>alert('User does not exist')</script>";
             echo "<script>window.location.href='../view/login.php'</script>";
@@ -70,7 +70,7 @@ if ($entity === "Doctor") {
     }
 }
 
-if ($entity === "Supervisor") {
+if ($entity === "supervisors") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -83,7 +83,7 @@ if ($entity === "Supervisor") {
 
             $_SESSION['entity'] = $entity;
             $_SESSION['username'] = $username;
-            header("Location: ../view/supervisor.php");
+            echo "<script>window.location.href='../view/supervisor.php'</script>";
         } else {
             echo "<script>alert('User does not exist')</script>";
             echo "<script>window.location.href='../view/login.php'</script>";
@@ -94,7 +94,7 @@ if ($entity === "Supervisor") {
     }
 }
 
-if ($entity === "Pharmaceutical") {
+if ($entity === "companies") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -108,7 +108,7 @@ if ($entity === "Pharmaceutical") {
             $_SESSION['entity'] = $entity;
             $_SESSION['username'] = $username;
             echo "<script>alert('Login Successful. Welcome');</script>";
-            header("Location: ../view/company.php");
+            echo "<script>window.location.href='../view/company.php'</script>";
         } else {
             echo "<script>alert('User does not exist')</script>";
             echo "<script>window.location.href='../view/login.php'</script>";
@@ -119,7 +119,7 @@ if ($entity === "Pharmaceutical") {
     }
 }
 
-if ($entity === "Pharmacy"){
+if ($entity === "pharmacies"){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -133,7 +133,7 @@ if ($entity === "Pharmacy"){
             $_SESSION['entity'] = $entity;
             $_SESSION['username'] = $username;
             echo "<script>alert('Login Successful. Welcome');</script>";
-            header("Location: ../view/pharmacy.php");
+            echo "<script>window.location.href='../view/pharmacy.php'</script>";
         } else {
             echo "<script>alert('User does not exist')</script>";
             echo "<script>window.location.href='../view/login.php'</script>";

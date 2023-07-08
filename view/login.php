@@ -32,12 +32,12 @@
             </div>
             <div class="input">
                 <select name="entity" id="entity" class="input-field" value="">
-                    <option value="" class="input">Select Entity</option>
-                    <option value="Doctor" class="input">Doctor</option>
-                    <option value="Patient" class="input">Patient</option>
-                    <option value="Supervisor" class="input">Supervisor</option>
-                    <option value="Pharmaceutical" class="input">Pharmaceutical</option>
-                    <option value="Pharmacy" class="input">Pharmacy</option>
+                    <option value="" class="input" disabled >Select Entity</option>
+                    <option value="doctors" class="input">Doctor</option>
+                    <option value="patients" class="input">Patient</option>
+                    <option value="supervisors" class="input">Supervisor</option>
+                    <option value="companies" class="input">Pharmaceutical</option>
+                    <option value="pharmacies" class="input">Pharmacy</option>
                 </select>
 				<label class="input-label">Entity</label>
 			</div>

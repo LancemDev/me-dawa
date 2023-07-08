@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Adding drugs</title>
+    <title>Pharmaceutical Company Portal</title>
     <link rel="stylesheet" href="../Static/form.scss">
     <link rel="stylesheet" href="../Static/homepage.css">
     <link rel="icon" href="../images/logo.jpg">
@@ -79,7 +79,7 @@
 
 
 <!--The footer-->
-<footer class="footer">
+<!-- <footer class="footer">
     <div class="footer-container">
       <div class="row">
         <div class="footer-col">
@@ -109,6 +109,6 @@
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 </body>
 </html>

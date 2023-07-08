@@ -4,7 +4,6 @@
     <title>Doctor Portal</title>
     <link rel="stylesheet" href="../Static/form.scss">
     <link rel="stylesheet" href="../Static/homepage.css">
-    <link rel="stylesheet" href="../Static/profile.scss">
     <link rel="icon" href="../images/logo.jpg">
 </head>
 <body>
@@ -31,39 +30,8 @@
       </ul>
   </nav>
 </div>
-<!--
-<div>
-  <article class="profile">
-    <div class="profile-image">
-      <img src="https://assets.codepen.io/285131/neongirl.jpg" />
-    </div>
-    <h2 class="profile-username">Lance Munyao</h2>
-    <small class="profile-user-handle">@elena_zoldado</small>
-    <div class="profile-actions">
-      <button class="btn btn--primary">Follow</button>
-      <button class="btn btn--icon">
-        <i class="ph-export"></i>
-      </button>
-      <button class="btn btn--icon">
-        <i class="ph-dots-three-outline-fill"></i>
-      </button>
-    </div>
-    <div class="profile-links">
-      <a href="#" class="link link--icon">
-        <i class="ph-twitter-logo"></i>
-      </a>
-      <a href="#" class="link link--icon">
-        <i class="ph-facebook-logo"></i>
-      </a>
-      <a href="#" class="link link--icon">
-        <i class="ph-instagram-logo"></i>
-      </a>
-    </div>
-  </article> -->
-</div>
 
-<div>
-	<!-- code here -->
+
 	<div class="card">
 		<div class="card-image">	
 			<h2 class="card-heading">
@@ -91,8 +59,68 @@
 	</div>
 </div>
 
+<?php
+        require_once '../database/database.php';
+
+        // Create an instance of the database class
+        $database = new Database();
+        $doctorID = $_SESSION['username'];
+        $entity = $_SESSION['entity'];
+        $results_per_page = 5; // Number of results per page
+        $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // Get the current page from URL
+        $start_index = ($current_page - 1) * $results_per_page; // Calculate the starting index for results
+
+        // Query to fetch users from the database based on the entity and pagination
+        $users = $database->getUsersByEntityAndIDForDoctor($entity, $doctorID, $start_index, $results_per_page);
+
+        // Display users in a table
+        echo '
+        <table style="width: 100%; border-collapse: collapse;">
+        <!-- Table Heading -->
+        <caption style="padding:8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Prescription History</caption>
+          <tr>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Prescription ID</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Patient ID</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Prescription Date</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Prescription Valid Until</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Prescription Notes from Doctor</th>
+          </tr>';
+          foreach ($users as $user) {
+              echo ' <tr>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['ID'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['patientID'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['prescriptionDate'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['prescriptionDuration'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['prescriptionNotes'] . '</td>
+                        <!-- Additional columns here -->
+                      </tr>';
+          }
+  
+        echo '</table>';
+
+        $total_results = $database->getTotalUsersByEntity($entity); // Get total number of users for the entity
+        $total_pages = ceil($total_results / $results_per_page); // Calculate total number of pages
+
+        echo '<div style="margin-top: 20px;">';
+
+        if($current_page > 1) {
+          echo '<a href="patient.php?entity=' . $entity . '&page=' . ($current_page - 1) . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">Previous</a>';
+        }
+
+        for ($i = 1; $i <= $total_pages; $i++) {
+          echo '<a href="patient.php?entity=' . $entity . '&page=' . $i . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">' . $i . '</a>';
+        }
+
+        if ($current_page < $total_pages) {
+          echo '<a href="patient.php?entity=' . $entity . '&page=' . ($current_page + 1) . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">Next</a>';
+        }
+
+        echo '</div>';
+        
+        ?>
+
 <!--The footer-->
-<footer class="footer">
+<!-- <footer class="footer">
     <div class="footer-container">
       <div class="row">
         <div class="footer-col">
@@ -122,7 +150,7 @@
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 </div>
 </body>
 </html>

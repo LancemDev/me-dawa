@@ -431,6 +431,36 @@ class Database{
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    function getUsersByEntityAndIDForPatient($entity, $ID, $start_index, $results_per_page){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM prescriptions WHERE patientID = :ID LIMIT :start_index, :results_per_page");
+        $stmt->bindParam(':ID', $ID);
+        $stmt->bindParam(':start_index', $start_index, PDO::PARAM_INT);
+        $stmt->bindParam(':results_per_page', $results_per_page, PDO::PARAM_INT);
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function getUsersByEntityAndIDForDoctor($entity, $ID, $start_index, $results_per_page){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM prescriptions WHERE doctorID = :ID LIMIT :start_index, :results_per_page");
+        $stmt->bindParam(':ID', $ID);
+        $stmt->bindParam(':start_index', $start_index, PDO::PARAM_INT);
+        $stmt->bindParam(':results_per_page', $results_per_page, PDO::PARAM_INT);
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     
     // Get total number of users for the entity
     function getTotalUsersByEntity($entity){

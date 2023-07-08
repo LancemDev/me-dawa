@@ -3,6 +3,7 @@
 <head>
   <title>Admin Dashboard</title>
   <link rel="icon" href="../images/logo.jpg">
+  <link rel="stylesheets" href="../Static/"
 </head>
 <body>
   <div style="display: flex;">
