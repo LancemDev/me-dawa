@@ -21,5 +21,16 @@ if (!empty($prescriptionID)){
 
 }
 
+// Dispense the drug based on the drug id posted here
+if(isset($_POST['dispense'])){
+    $drugID = $_POST['dispense'];
+    if($database->dispense($drugID)){
+        echo "<script>alert('Drug dispensed Successfully')</script>";
+
+        // Then redirect back to the form to dispense another drug
+        echo "<script>window.location.href='../view/pharmacy.php'</script>";
+    }
+}
+
 
 ?>

@@ -492,5 +492,17 @@ class Database{
         }
     }
     
+    // get drugs that are approved 
+    function getApprovedDrugs(){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM drugs WHERE approved = 1");
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }
 ?>

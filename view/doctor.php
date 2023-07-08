@@ -120,7 +120,7 @@
         ?>
 
 <!--The footer-->
-<!-- <footer class="footer">
+<footer class="footer">
     <div class="footer-container">
       <div class="row">
         <div class="footer-col">
@@ -150,7 +150,7 @@
         </div>
       </div>
     </div>
-  </footer> -->
+  </footer>
 </div>
 </body>
 </html>
