@@ -388,13 +388,14 @@ class Database{
     }
 
     // Removing drug from database using the prescriptionID
-    function dispense($prescriptionID){
-        $stmt = $this->connection->prepare("DELETE FROM drugs where prescriptionID = :prescriptionID");
-        $stmt->bindParam(':prescriptionID', $prescriptionID);
+    function dispense($ID){
+        $stmt = $this->connection->prepare("DELETE FROM drugs where ID = :ID");
+        $stmt->bindParam(':ID', $ID);
 
         // Execute statement
         $stmt->execute();
 
+        // If it works return true
         if($stmt){
             return true;
         } else {
@@ -491,11 +492,13 @@ class Database{
             return false;
         }
     }
-    
+
     // get drugs that are approved 
-    function getApprovedDrugs(){
+    function getApprovedDrugs($start_index, $results_per_page, $entity){
         // Prepare statement
-        $stmt = $this->connection->prepare("SELECT * FROM drugs WHERE approved = 1");
+        $stmt = $this->connection->prepare("SELECT * FROM drugs WHERE approved = 1 LIMIT :start_index, :results_per_page");
+        $stmt->bindParam(':start_index', $start_index, PDO::PARAM_INT);
+        $stmt->bindParam(':results_per_page', $results_per_page, PDO::PARAM_INT);
     
         // Execute statement
         $stmt->execute();

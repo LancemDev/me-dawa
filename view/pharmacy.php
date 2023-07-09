@@ -31,27 +31,6 @@
             </ul>
         </nav>
     </div>
-
-    <div>
-        <!-- code here -->
-        <div class="card">
-            <div class="card-image">	
-                <h2 class="card-heading">
-                    Hello<br>
-                    <small>Dispense your drug</small>
-                </h2>
-            </div>
-            <form class="card-form" method="POST" action="../config/pharmacy.php">
-                <div class="input">
-                    <input type="text" class="input-field" name="prescriptionID"  required/>
-                    <label class="input-label">Prescription ID</label>
-                </div>
-                <div class="action">
-                    <input type="submit" class="action-button" value="Dispense Drug" />
-                </div>
-            </form>
-        </div>
-    </div>
     <?php
         require_once '../database/database.php';
 
@@ -64,7 +43,7 @@
         $start_index = ($current_page - 1) * $results_per_page; // Calculate the starting index for results
 
         // Get users from the database
-        $users = $database->getApprovedDrugs();
+        $users = $database->getApprovedDrugs($start_index, $results_per_page, $entity);
 
         // Display users in a table
         echo '
@@ -80,6 +59,7 @@
               <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug Expiry Date</th>
               <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug Manufacturing Date</th>
               <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug Company</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Action</th>
           </tr>';
           foreach ($users as $user) {
               echo ' <tr>
@@ -91,7 +71,12 @@
                         <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugExpirationDate'] . '</td>
                         <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugManufacturingDate'] . '</td>
                         <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugCompany'] . '</td>
-                        <!-- Additional columns here -->
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">
+                            <form method="POST" action="../config/pharmacy.php">
+                              <input type="hidden" name="drugID" value="' . $user['ID'] . '">
+                              <input type="submit" name="dispense" value="dispense" style="background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
+                            </form>
+                        </td>
                       </tr>';
           }
   
@@ -102,19 +87,20 @@
 
         echo '<div style="margin-top: 20px;">';
 
-        if($current_page > 1) {
-          echo '<a href="patient.php?entity=' . $entity . '&page=' . ($current_page - 1) . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">Previous</a>';
+        if ($current_page > 1) {
+          echo '<a href="pharmacy.php?entity=' . $entity . '&page=' . ($current_page - 1) . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">Previous</a>';
         }
 
         for ($i = 1; $i <= $total_pages; $i++) {
-          echo '<a href="patient.php?entity=' . $entity . '&page=' . $i . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">' . $i . '</a>';
+          echo '<a href="pharmacy.php?entity=' . $entity . '&page=' . $i . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">' . $i . '</a>';
         }
 
         if ($current_page < $total_pages) {
-          echo '<a href="patient.php?entity=' . $entity . '&page=' . ($current_page + 1) . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">Next</a>';
+          echo '<a href="pharmacy.php?entity=' . $entity . '&page=' . ($current_page + 1) . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">Next</a>';
         }
 
         echo '</div>';
+
         
         ?>
 
