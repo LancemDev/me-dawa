@@ -507,5 +507,20 @@ class Database{
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    // get drugs that are not approved
+    function getNotApprovedDrugs($start_index, $results_per_page, $entity){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM drugs WHERE approved = 0 LIMIT :start_index, :results_per_page");
+        $stmt->bindParam(':start_index', $start_index, PDO::PARAM_INT);
+        $stmt->bindParam(':results_per_page', $results_per_page, PDO::PARAM_INT);
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }
 ?>

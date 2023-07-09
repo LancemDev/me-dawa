@@ -28,38 +28,80 @@
 </nav>
 </div>
 
-<div class="">
-	<!-- code here -->
-	<div class="card">
-		<div class="card-image">	
-			<h2 class="card-heading">
-				Welcome back<br>
-				<small>Approve drugs</small>
-			</h2>
-		</div>
-		<form class="card-form" method="post" action="../config/supervisor.php">
-			<div class="input">
-				<input type="number" class="input-field" name="drugID"  required/>
-				<label class="input-label">Drug ID</label>
-			</div>
-      <div class="action">
-          <input type="submit" class="action-button" value="Approve" />
-      </div>
-        </form>
-	</div>
-</div>
 
-<!-- The content of the page for supervisor-->
-<div class="content">
-    <div class="content-container">
-        <div class="row">
-            <div class="content-col">
-                <h3>Supervisor Portal</h3>
-                <p>Here, you, can approve drugs </p>
-            </div>
-        </div>
-    </div>
-</div>
+
+<?php
+        require_once '../database/database.php';
+
+        // Create an instance of the database class
+        $database = new Database();
+        $patientID = $_SESSION['username'];
+        $entity = $_SESSION['entity'];
+        $results_per_page = 5; // Number of results per page
+        $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // Get the current page from URL
+        $start_index = ($current_page - 1) * $results_per_page; // Calculate the starting index for results
+
+        // Get users from the database
+        $users = $database->getNotApprovedDrugs($start_index, $results_per_page, $entity);
+
+        // Display users in a table
+        echo '
+        <table style="width: 100%; border-collapse: collapse;">
+        <!-- Table Heading -->
+        <caption style="padding: 8px; text-align: center; border-bottom: 1px solid #333; color: #333;">Drugs not yet Approved</caption>
+          <tr>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug ID</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug Name</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug Description</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug Price</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug Quantity</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug Expiry Date</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug Manufacturing Date</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug Company</th>
+              <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Action</th>
+          </tr>';
+          foreach ($users as $user) {
+              echo ' <tr>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['ID'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugName'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugDescription'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugPrice'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugQuantity'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugExpirationDate'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugManufacturingDate'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugCompany'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">
+                            <form method="POST" action="../config/supervisor.php">
+                              <input type="hidden" name="drugID" value="' . $user['ID'] . '">
+                              <input type="submit" name="approve" value="approve" style="background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
+                            </form>
+                        </td>
+                      </tr>';
+          }
+  
+        echo '</table>';
+
+        $total_results = $database->getTotalUsersByEntity($entity); // Get total number of users for the entity
+        $total_pages = ceil($total_results / $results_per_page); // Calculate total number of pages
+
+        echo '<div style="margin-top: 20px;">';
+
+        if ($current_page > 1) {
+          echo '<a href="pharmacy.php?entity=' . $entity . '&page=' . ($current_page - 1) . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">Previous</a>';
+        }
+
+        for ($i = 1; $i <= $total_pages; $i++) {
+          echo '<a href="pharmacy.php?entity=' . $entity . '&page=' . $i . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">' . $i . '</a>';
+        }
+
+        if ($current_page < $total_pages) {
+          echo '<a href="pharmacy.php?entity=' . $entity . '&page=' . ($current_page + 1) . '" style="display: inline-block; padding: 8px 16px; text-decoration: none; color: #333; border: 1px solid #ddd; margin-right: 5px;">Next</a>';
+        }
+
+        echo '</div>';
+
+        
+        ?>
 
 
 
@@ -83,7 +125,7 @@
 
 
 <!--The footer-->
-<!-- <footer class="footer">
+<footer class="footer">
     <div class="footer-container">
       <div class="row">
         <div class="footer-col">
@@ -113,6 +155,6 @@
         </div>
       </div>
     </div>
-  </footer> -->
+  </footer>
 </body>
 </html>
