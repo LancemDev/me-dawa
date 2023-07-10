@@ -31,52 +31,7 @@
 </div>
 
 
-	<div class="card">
-		<div class="card-image">	
-			<h2 class="card-heading">
-				Welcome Doc<br>
-				<small>Add Prescription</small>
-			</h2>
-		</div>
-		  <form class="card-form" method="post" action="../config/doctor.php">
-			  <div class="input">
-				  <input type="number" class="input-field" name="patientID"  required/>
-				  <label class="input-label">Patient ID</label>
-			  </div>
-        <div class="input">
-				  <select name="drugName" id="drugName" class="input-field" value="">
-            <option value="" class="input" disabled selected>Drug Name</option>
-            <?php
-              include_once '../database/database.php';
-              $database = new database();
-              $items = $database->getDrugs();
-              foreach ($items as $item):
-            ?>
-            <option class="input" value="<?php echo $item['drugName'] ?>"><?php echo $item['drugName'] ?></option> 
-            <label class="input-label">Drug Name</label>
-            <?php endforeach; ?>
-          </select>
-          
-			  </div>
-
-        <div class="input">
-          <input type="text" class="input-field" name="prescriptionDescription" required/>
-          <label class="input-label">Prescription Description</label>
-        </div>
-        <div class="input">
-				  <input type="date" class="input-field" name="prescriptionDuration"  required/>
-				  <label class="input-label">Prescription Duration</label>
-			  </div>   
-        <div class="input">
-          <input type="text" class="input-field" name="prescriptionNotes" required/>
-          <label class="input-label">Prescription Notes</label>
-        </div>
-        <div class="action">
-          <input type="submit" class="action-button" value="Add Prescription" />
-        </div>
-      </form>
-	</div>
-</div>
+	
 
 <?php
         require_once '../database/database.php';
@@ -137,6 +92,54 @@
         echo '</div>';
         
         ?>
+        <div class="card">
+		<div class="card-image">	
+			<h2 class="card-heading">
+				Welcome Doc<br>
+				<small>Add Prescription</small>
+			</h2>
+		</div>
+		  <form class="card-form" method="post" action="../config/doctor.php">
+			  <div class="input">
+				  <input type="number" class="input-field" name="patientID"  required/>
+				  <label class="input-label">Patient ID</label>
+			  </div>
+
+        <!-- getting the drug names from the db -->
+        <div class="input">
+				  <select name="  drugID" id="drugID" class="input-field" value="">
+            <option value="" class="input" disabled selected>Drug Name</option>
+            <?php
+              include_once '../database/database.php';
+              $database = new database();
+              $items = $database->getDrugs();
+              foreach ($items as $item):
+            ?>
+            <option class="input" value="<?php $item['ID'] ?>" <?php echo $item['drugName'] ?> "><?php echo $item['drugName'] ?></option> 
+            <label class="input-label">Drug Name</label>
+            <?php endforeach; ?>
+          </select>
+          
+			  </div>
+
+        <div class="input">
+          <input type="text" class="input-field" name="prescriptionDescription" required/>
+          <label class="input-label">Prescription Description</label>
+        </div>
+        <div class="input">
+				  <input type="date" class="input-field" name="prescriptionDuration"  required/>
+				  <label class="input-label">Prescription Duration</label>
+			  </div>   
+        <div class="input">
+          <input type="text" class="input-field" name="prescriptionNotes" required/>
+          <label class="input-label">Prescription Notes</label>
+        </div>
+        <div class="action">
+          <input type="submit" class="action-button" value="Add Prescription" />
+        </div>
+      </form>
+	</div>
+</div>
 
 <!--The footer-->
 <footer class="footer">

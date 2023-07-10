@@ -535,5 +535,20 @@ class Database{
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    // check if patient is in db
+    function getPatientByID($ID){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM patients WHERE ID = :ID");
+        $stmt->bindParam(':ID', $ID);
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 }
 ?>

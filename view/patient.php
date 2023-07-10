@@ -7,6 +7,34 @@
     <link rel="stylesheet" href="../Static/form.scss">
     <link rel="stylesheet" href="../Static/table.scss">
     <link rel="icon" href="../images/logo.jpg">
+    <style>
+    /* CSS for the navbar */
+    .navbar {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: #000;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
 </head>
 <body>
 <!--The Navigation Bar-->
@@ -29,7 +57,10 @@
             <li><a href="../config/signout.php">Sign Out</a></li>
           </div>
       </ul>
+    </div>
+  </div>
   </nav>
+
 </div>
 
 <div>
@@ -131,6 +162,8 @@
       </div>
     </div>
   </footer>
+
+
 
 </body>
 </html>
