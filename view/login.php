@@ -32,7 +32,7 @@
             </div>
             <div class="input">
                 <select name="entity" id="entity" class="input-field" value="">
-                    <option value="" class="input" disabled >Select Entity</option>
+                    <option value="" class="input" disabled selected>Select Entity</option>
                     <option value="doctors" class="input">Doctor</option>
                     <option value="patients" class="input">Patient</option>
                     <option value="supervisors" class="input">Supervisor</option>

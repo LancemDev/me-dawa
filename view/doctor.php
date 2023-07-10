@@ -7,7 +7,6 @@
     <link rel="icon" href="../images/logo.jpg">
 </head>
 <body>
-  <div class="body">
 <!--The Navigation Bar-->
 <div>
   <nav class="navbar">
@@ -45,6 +44,22 @@
 				  <label class="input-label">Patient ID</label>
 			  </div>
         <div class="input">
+				  <select name="drugName" id="drugName" class="input-field" value="">
+            <option value="" class="input" disabled selected>Drug Name</option>
+            <?php
+              include_once '../database/database.php';
+              $database = new database();
+              $items = $database->getDrugs();
+              foreach ($items as $item):
+            ?>
+            <option class="input" value="<?php echo $item['drugName'] ?>"><?php echo $item['drugName'] ?></option> 
+            <label class="input-label">Drug Name</label>
+            <?php endforeach; ?>
+          </select>
+          
+			  </div>
+
+        <div class="input">
           <input type="text" class="input-field" name="prescriptionDescription" required/>
           <label class="input-label">Prescription Description</label>
         </div>
@@ -52,6 +67,10 @@
 				  <input type="date" class="input-field" name="prescriptionDuration"  required/>
 				  <label class="input-label">Prescription Duration</label>
 			  </div>   
+        <div class="input">
+          <input type="text" class="input-field" name="prescriptionNotes" required/>
+          <label class="input-label">Prescription Notes</label>
+        </div>
         <div class="action">
           <input type="submit" class="action-button" value="Add Prescription" />
         </div>
