@@ -119,7 +119,6 @@
             <label class="input-label">Drug Name</label>
             <?php endforeach; ?>
           </select>
-          
 			  </div>
 
         <div class="input">

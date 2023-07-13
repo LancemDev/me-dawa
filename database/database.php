@@ -550,5 +550,31 @@ class Database{
         return $result;
     }
 
+    // Select everythong from entity
+    function getEntity($entity){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM $entity");
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    // Get total number of users for the entity
+    function getTotal($entity){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT COUNT(*) FROM $entity");
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetchColumn();
+        return $result;
+    }
+
 }
 ?>
