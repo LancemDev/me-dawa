@@ -1,4 +1,64 @@
-<?php //action = 'null'; ?> 
+<?php 
+    session_start();
+
+    include '../database/database.php';
+
+    $database = new database();
+
+
+    if(isset($_GET['action'])){
+        $action = $_GET['action'];
+        $_SESSION['action'] = $action;
+
+        switch($action){
+            case 'viewPatients':
+                $data = $database->getEntity("patients");
+                break;
+            case 'viewDoctors':
+                $data = $database->getEntity("doctors");
+                break;
+            case 'viewCompanies':
+                $data = $database->getEntity("companies");
+                break;
+            case 'viewSupervisors':
+                $data = $database->getEntity("supervisors");
+                break;
+            case 'viewPharmacies':
+                $data = $database->getEntity("pharmacies");
+                break;
+            case 'viewPrescriptions':
+                $data = $database->getEntity("prescriptions");
+                break;
+            case 'viewDrugs':
+                $data = $database->getEntity("drugs");
+                break;
+            case 'registerDoctors':
+                $data = $database->getEntity("doctors");
+                break;
+            case 'registerSupervisors':
+                $data = $database->getEntity("supervisors");
+                break;
+            case 'updateDrugs':
+                $data = $database->getEntity("drugs");
+                break;
+            case 'updatePatients':
+                $data = $database->getEntity("patients");
+                break;
+            case 'updateSupervisors':
+                $data = $database->getEntity("supervisors");
+                break;
+            case 'updateDoctors':
+                $data = $database->getEntity("doctors");
+                break;
+            case 'deleteDrugs':
+                $data = $database->getEntity("drugs");
+                break;
+            default:
+                echo "<script>alert('Error 101');</script>";
+                break;
+        }
+    }
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,18 +89,6 @@
                 <a href="#">
                     <i class='bx bxs-dashboard' ></i>
                     <span class="text">Admin Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="dash.php?action=registerDoctors">
-                    <i class='bx bxs-shopping-bag-alt' ></i>
-                    <span class="text">Register Doctors</span>
-                </a>
-            </li>
-            <li>
-                <a href="dash.php?action=registerSupervisors">
-                    <i class='bx bxs-shopping-bag-alt' ></i>
-                    <span class="text">Register Supervisors</span>
                 </a>
             </li>
             <li>
@@ -104,57 +152,6 @@
     <!-- SIDEBAR -->
 
 
-    <?php 
-    session_start();
-
-    include '../database/database.php';
-
-    $database = new database();
-
-    if(isset($_GET['action'])){
-        $action = $_GET['action'];
-        $_SESSION['action'] = $action;
-
-        switch($action){
-            case 'viewPatients':
-                $data = $database->getEntity("patients");
-                break;
-            case 'viewDoctors':
-                $data = $database->getEntity("doctors");
-                break;
-            case 'viewCompanies':
-                $data = $database->getEntity("companies");
-                break;
-            case 'viewSupervisors':
-                $data = $database->getEntity("supervisors");
-                break;
-            case 'viewPharmacies':
-                $data = $database->getEntity("pharmacies");
-                break;
-            case 'viewPrescriptions':
-                $data = $database->getEntity("prescriptions");
-                break;
-            case 'viewDrugs':
-                $data = $database->getEntity("drugs");
-                break;
-            case 'registerDoctors':
-                $data = $database->getEntity("doctors");
-                break;
-            case 'registerSupervisors':
-                $data = $database->getEntity("supervisors");
-                break;
-            default:
-                echo "<script>alert('Error 101');</script>";
-                break;
-        }
-    }
-    else{
-        echo "<script>alert('Error 102')</script>";
-    }
-    ?>
-
-
-
     <!-- CONTENT -->
     <section id="content">
         <!-- NAVBAR -->
@@ -198,6 +195,8 @@
             <div class="table-data">
                 <div class="order">
                     <table>
+
+                        <!-- VIEW PATIENTS -->
 
                         <?php if($action == 'viewPatients'): ?>
                             <div class="head">
@@ -319,7 +318,7 @@
                                         <td><?php echo $row['supervisorDOB']; ?></td>
                                         <td>
                                             <a href="../config/deleteUser.php?id=<?php echo $row['ID']; ?>&type=supervisor" class="action-icon" onclick="return confirm('Are you sure you want to delete this user?')"><i class='bx bx-trash'></i></a>
-                                            <a href="../config/updateUser.php?id=<?php echo $row['ID']; ?>&type=supervisor" class="action-icon"><i class='bx bx-edit'></i></a>
+                                            <a href="../config/updateUser.php?id=<?php echo $row['ID']; ?>&type=supervisor&data=<?php echo $row ?>" class="action-icon"><i class='bx bx-edit'></i></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -415,14 +414,14 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Drug Name</th>
-                                    <th>Drug Description</th>
-                                    <th>Drug Price</th>
-                                    <th>Drug Quantity</th>
-                                    <th>Drug Expiry Date</th>
-                                    <th>Drug Manufacturing Date</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Expiry Date</th>
+                                    <th>Manufacturing Date</th>
                                     <th>Drug Company</th>
-                                    <th>Drug Approved</th>
+                                    <th>Approved</th>
                                     <th>Actions</th> <!-- New column for actions -->
                                 </tr>
                             </thead>
@@ -440,10 +439,31 @@
                                         <td><?php echo $row['drugManufacturingDate']; ?></td>
                                         <td><?php echo $row['drugCompany']; ?></td>
                                         <td><?php echo $row['Approved']; ?></td>
+                                        <!-- <td>
+                                            <a href="delete_user.php?id=<?php //echo $row['ID']; ?>&type=drug" class="action-icon" onclick="return confirm('Are you sure you want to delete this user?')"><i class='bx bx-trash'></i></a>
+                                            <a href="update_user.php?id=<?php //echo $row['ID']; ?>&type=drug" class="action-icon"><i class='bx bx-edit'></i></a>
+                                        </td> -->
                                         <td>
-                                            <a href="delete_user.php?id=<?php echo $row['ID']; ?>&type=drug" class="action-icon" onclick="return confirm('Are you sure you want to delete this user?')"><i class='bx bx-trash'></i></a>
-                                            <a href="update_user.php?id=<?php echo $row['ID']; ?>&type=drug" class="action-icon"><i class='bx bx-edit'></i></a>
+                                            <form method="POST" action="../view/dash.php?action=deleteDrugs">
+                                                <input type="hidden" name="id" value="<?php echo $row['ID']; ?>">
+                                                <input type="hidden" name="type" value="drug">
+                                                <a href="#" onclick="if(confirm('Are you sure you want to delete this user?')) { this.parentNode.submit(); }" class="action-icon">
+                                                    <i class='bx bx-trash'></i>
+                                                </a>
+                                            </form>
+                                            <form method="POST" action="../view/dash.php?action=updateDrugs">
+                                                <input type="hidden" name="id" value="<?php echo $row['ID']; ?>">
+                                                <input type="hidden" name="type" value="drug">
+                                                <input type="hidden" name="action" value="updateDrugs">
+                                                <a href="#" onclick="this.parentNode.submit();" class="action-icon">
+                                                    <i class='bx bx-edit'></i>
+                                                </a>
+                                            </form>
                                         </td>
+
+
+
+
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -488,6 +508,76 @@
                                 <?php endforeach; ?>
                             </tbody>
                         <?php endif ?>
+
+                        <!-- UPDATE DRUGS -->
+
+                        <?php 
+                        if($action == 'updateDrugs'): 
+                            $id = $_POST['id'];
+                            $data = $database->getDrug($id);
+                        ?>
+                            <div class="card">
+                                <form class="card-form" method="post" action="../config/updateDrugs.php">
+                                    <div class="input">
+                                        <input type="text" class="input-field" name="drugName" value="<?php echo $data['drugName']; ?>" required/>
+                                        <label class="input-label">Drug Name</label>
+                                    </div>
+                                    <div class="input">
+                                        <input type="text" class="input-field" name="drugDescription" value="<?php echo $data['drugDescription']; ?>" required/>
+                                        <label class="input-label">Drug Description</label>
+                                    </div>
+                                    <div class="input">
+                                        <input type="number" step="0.01" min="0" class="input-field" name="drugPrice" value="<?php echo $data['drugPrice']; ?>" required/>
+                                        <label class="input-label">Drug Price</label>
+                                    </div>
+                                    <div class="input">
+                                        <input type="number" class="input-field" name="drugQuantity" value="<?php echo $data['drugQuantity']; ?>" required/>
+                                        <label class="input-label">Drug Quantity</label>
+                                    </div>
+                                    <div class="input">
+                                        <input type="date" class="input-field" name="drugExpirationDate" value="<?php echo $data['drugExpirationDate']; ?>" required/>
+                                        <label class="input-label">Drug Expiration Date</label>
+                                    </div>
+                                    <div class="input">
+                                        <input type="date" class="input-field" name="drugManufacturingDate" value="<?php echo $data['drugManufacturingDate']; ?>" required/>
+                                        <label class="input-label">Drug Manufacturing Date</label>
+                                    </div>
+                                    <div class="input">
+                                        <input type="text" class="input-field" name="drugCompany" value="<?php echo $data['drugCompany']; ?>" required/>
+                                        <label class="input-label">Drug Company</label>
+                                    </div>
+                                    <div class="input">
+                                        <input type="text" class="input-field" name="drugApproved" value="<?php echo $data['Approved']; ?>" required/>
+                                        <label class="input-label">Drug Approved</label>
+                                    </div>
+                                    <!-- <input type="hidden" name="id" value="<?php echo $data['ID']; ?>">
+                                    <input type="hidden" name="type" value="updateDrug">
+                                    <input type="submit" class="btn" name="updateDrug" value="Update Drug"> -->
+                                    <div class="action">
+                                        <input type="hidden" name="ID" value="<?php echo $data['ID']; ?>">
+                                        <input type="hidden" name="type" value="updateDrug">
+                                        <input type="submit" class="action-button" name="updateDrug" value="Update Drug">
+                                    </div>
+                                </form>
+                            </div>
+                        <?php endif ?>
+
+
+                        <!-- DELETE DRUGS -->
+                        <?php if ($action == 'deleteDrugs'): 
+                         $id = $_POST['id'];
+                         if($database->deleteDrug($id)){
+                            echo "<script>alert('Drug deleted successfully')</script>";
+                            echo "<script>window.location.href = '../view/dash.php?action=viewDrugs'</script>";
+                         }else{
+                            echo "<script>alert('Drug not deleted')</script>";
+                            echo "<script>window.location.href = '../view/dash.php?action=viewDrugs'</script>";
+                         }
+                        ?>
+                        <?php endif ?>
+                        
+
+
                     </table>
                 </div>
             </div>
@@ -497,6 +587,6 @@
     </section>
     <!-- CONTENT -->
 
-    <script src="../Static/dash.js"></script>
+    <script src="../Scripts/dash.js"></script>
 </body>
 </html>

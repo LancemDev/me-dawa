@@ -92,4 +92,32 @@ if($entity === "Patient"){
         echo "Please fill in all the fields";
         header("Location: ../view/signup.php");
     }
+} else if($entity === "Admin"){
+    $adminFirstName = $_POST['firstName'];
+    $adminSecondName = $_POST['lastName'];
+    $adminEmail = $_POST['emailaddress'];
+    $adminPassword = $_POST['password'];
+    $adminPhoneNumber = $_POST['phoneNumber'];
+    $adminAddress = $_POST['address'];
+    $adminGender = $_POST['gender'];
+    $adminDOB = $_POST['dob'];
+
+    // Add these details to the database if all fields are entered
+    if(!empty($adminFirstName) && !empty($adminSecondName) && !empty($adminEmail) && !empty($adminPassword) && !empty($adminPhoneNumber) && !empty($adminAddress) && !empty($adminGender) && !empty($adminDOB)){
+        // Add the details to the database
+        $database->adminSignup($adminFirstName, $adminSecondName, $adminEmail, $adminPassword, $adminPhoneNumber, $adminAddress, $adminGender, $adminDOB);
+        // Get the generated admin id and echo it
+        $adminId = $database->getAdminId($adminEmail);
+
+        // Display the admin ID using JavaScript alert
+        echo "<script>alert('Your admin id is: " . $adminId . ". Please use it to login.');</script>";
+
+        // Redirect to the login page after the alert is displayed
+        echo "<script>window.location.href = '../view/login.php';</script>";
+        exit();
+    } else {
+        echo "Please fill in all the fields";
+        header("Location: ../view/signup.php");
+    }
+
 }

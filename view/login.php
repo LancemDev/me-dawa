@@ -38,6 +38,7 @@
                     <option value="supervisors" class="input">Supervisor</option>
                     <option value="companies" class="input">Pharmaceutical</option>
                     <option value="pharmacies" class="input">Pharmacy</option>
+                    <option value="admins" class="input">Admin</option>
                 </select>
 				<label class="input-label">Entity</label>
 			</div>

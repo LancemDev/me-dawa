@@ -59,6 +59,7 @@
                     <option value="Doctor" class="input">Doctor</option>
                     <option value="Patient" class="input">Patient</option>
                     <option value="Supervisor" class="input">Supervisor</option>
+					<option value="Admin" class="input">Admin</option>
                 </select>
 				<label class="input-label">Entity</label>
 			</div>

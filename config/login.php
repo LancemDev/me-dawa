@@ -144,6 +144,31 @@ if ($entity === "pharmacies"){
     }
 }
 
+if ($entity === "admins") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Check if the fields are empty
+    if (!empty($username) && !empty($password) && !empty($entity)) {
+        // Check if the user exists and if they do, redirect them to views/admin.view.php
+        if ($database->adminExists($username, $password)) {
+            // get id of admin and store in session and display it as a js alert
+            echo "<script>alert('Login Successful')</script>";
+
+            $_SESSION['entity'] = $entity;
+            $_SESSION['username'] = $username;
+            echo "<script>alert('Login Successful. Welcome');</script>";
+            echo "<script>window.location.href='../view/dash.php'</script>";
+        } else {
+            echo "<script>alert('User does not exist')</script>";
+            echo "<script>window.location.href='../view/login.php'</script>";
+        }
+    } else {
+        echo "<script>alert('Please fill in all the fields')</script>";
+        echo "<script>window.location.href='../view/login.php'</script>";
+    }
+}
+
 
 ?>
 

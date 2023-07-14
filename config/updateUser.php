@@ -21,7 +21,7 @@ if (isset($_GET['id']) && isset($_GET['type'])) {
         </head>
         <body>
             <h1>Update User</h1>
-            <form method="POST" action="process_update.php">
+            <form method="POST" action="../config/processUpdate.php">
                 <!-- Include necessary form fields based on user type -->
                 <input type="hidden" name="user_id" value="' . $userId . '">
                 <input type="hidden" name="user_type" value="' . $userType . '">
