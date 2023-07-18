@@ -15,12 +15,12 @@ $drugCompany = $_POST['drugCompany'];
 // Check if the entries are empty
 if (empty($drugName) || empty($drugDescription) || empty($drugPrice) || empty($drugQuantity) || empty($drugExpirationDate) || empty($drugCompany)) {
     echo "<script>alert('Please fill in all the fields')</script>";
-    echo "<script>window.location.href='../view/company.view.php'</script>";
+    echo "<script>window.location.href='../view/company.php'</script>";
 } else {
     // Add the drug to the database
     $database->addMeds($drugName, $drugDescription, $drugPrice, $drugQuantity, $drugExpirationDate, $drugManufacturingDate, $drugCompany,);
     echo "<script>alert('Drug added successfully')</script>";
-    echo "<script>window.location.href='../view/company.view.php'</script>";
+    echo "<script>window.location.href='../view/company.php'</script>";
 }
 
 
