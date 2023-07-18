@@ -57,6 +57,8 @@
                 echo "<script>alert('Error 101');</script>";
                 break;
         }
+    } else{
+        $action = array();
     }
     ?>
 

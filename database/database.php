@@ -445,20 +445,33 @@ class Database{
         }
     }
 
-    // Removing drug from database using the prescriptionID
-    function dispense($ID){
-        $stmt = $this->connection->prepare("DELETE FROM drugs where ID = :ID");
-        $stmt->bindParam(':ID', $ID);
+    // Dispensing the drug by reducing the quantity, then fetch the patientID and doctorID from prescriptions table. Use those two IDs to insert into dispensed table
+    function dispense($drugID){
+        //Prepare statement
+        $stmt = $this->connection->prepare("UPDATE drugs SET drugQuantity = drugQuantity - 1 WHERE ID = :ID");
+        $stmt->bindParam(':ID', $drugID);
 
-        // Execute statement
+        //Execute statement
         $stmt->execute();
 
-        // If it works return true
-        if($stmt){
-            return true;
-        } else {
-            return false;
-        }
+        //Fetch the patientID and doctorID from prescriptions table
+        $stmt = $this->connection->prepare("SELECT patientID, doctorID FROM prescriptions WHERE ID = :ID");
+        $stmt->bindParam(':ID', $drugID);
+
+        //Execute statement
+        $stmt->execute();
+
+        //Fetch the result
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        //Insert into dispensed table
+        $stmt = $this->connection->prepare("INSERT INTO dispensed (patientID, doctorID, drugID) VALUES (:patientID, :doctorID, :drugID)");
+        $stmt->bindParam(':patientID', $result['patientID']);
+        $stmt->bindParam(':doctorID', $result['doctorID']);
+        $stmt->bindParam(':drugID', $drugID);
+
+        //Execute statement
+        $stmt->execute();
     }
 
     // Get data from prescriptions table where patientID = patientID
@@ -466,6 +479,23 @@ class Database{
         //Prepare statement
         $stmt = $this->connection->prepare("SELECT * FROM prescriptions WHERE patientID = :patientID");
         $stmt->bindParam(':patientID', $patientID);
+
+        //Execute statement
+        $stmt->execute();
+
+        //Fetch data
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    // Get dispensed drugs for a patient
+    function getDispensedDrugsForPatient($patientID, $start_index, $results_per_page){
+        //Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM dispensed WHERE patientID = :patientID LIMIT :start_index, :results_per_page");
+        $stmt->bindParam(':patientID', $patientID);
+        $stmt->bindParam(':start_index', $start_index, PDO::PARAM_INT);
+        $stmt->bindParam(':results_per_page', $results_per_page, PDO::PARAM_INT);
 
         //Execute statement
         $stmt->execute();
@@ -688,6 +718,20 @@ class Database{
         } else {
             return false;
         }
+    }
+
+    // search patient by name
+    function searchPatient($patientName){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM patients WHERE patientName LIKE :patientName");
+        $stmt->bindParam(':patientName', $patientName);
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
 }
